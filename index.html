@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>탐라그라운드 · 프로그램 신청</title>
+<meta name="description" content="조선으로 떠나는 제주 이색 체험, 탐라그라운드. 비양도 어린왕자·성읍 야외 방탈출·탐탐판놀이 프로그램 신청 페이지">
+<meta property="og:title" content="탐라그라운드 · 프로그램 신청">
+<meta property="og:description" content="비양도 어린왕자 · 성읍민속마을 야외 방탈출 · 제주어 보드게임 탐탐판놀이 — 여기서 바로 신청하세요">
+<meta property="og:image" content="https://tamnaground.github.io/assets/biyang.jpg">
+<meta name="theme-color" content="#FFF4EA">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23E8630A'/><text x='50' y='66' font-size='46' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>탐</text></svg>">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --orange:#E8630A; --orange-deep:#C24F03; --orange-soft:#FFE3CC;
+    --green:#2E7D32; --green-soft:#DCEFDD;
+    --blue:#0047AB; --blue-soft:#DCE6F7;
+    --ink:#231A12; --ink-2:#5C4E40; --ink-3:#8E8071;
+    --bg:#FFF4EA; --bg-2:#FFE9D6; --surface:#FFFFFF;
+    --line:rgba(35,26,18,.10); --line-strong:rgba(35,26,18,.18);
+    --radius:22px; --radius-sm:14px; --maxw:440px;
+    --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+    --shadow:0 10px 30px -12px rgba(120,60,10,.25);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{
+    font-family:var(--font);color:var(--ink);background:var(--bg);
+    background-image:
+      radial-gradient(90% 60% at 50% -12%, #FFD6B3 0%, rgba(255,214,179,0) 70%),
+      radial-gradient(60% 40% at 100% 20%, rgba(255,228,200,.8) 0%, rgba(255,228,200,0) 70%);
+    background-attachment:fixed;
+    min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased;
+    padding:0 0 calc(48px + env(safe-area-inset-bottom));
+  }
+  a{color:inherit}
+  button{font:inherit;color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:28px 18px 0}
+
+  /* ---------- profile ---------- */
+  .profile{text-align:center;padding:14px 0 6px}
+  .avatar{
+    width:92px;height:92px;border-radius:50%;margin:0 auto 14px;
+    background:linear-gradient(145deg,#FF9C4A 0%,var(--orange) 55%,var(--orange-deep) 100%);
+    display:grid;place-items:center;color:#fff;font-weight:800;font-size:38px;letter-spacing:-.02em;
+    box-shadow:0 8px 24px -8px rgba(232,99,10,.6), inset 0 0 0 4px rgba(255,255,255,.55);
+  }
+  .name{margin:0;font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .handle{margin:2px 0 10px;color:var(--ink-3);font-size:14px}
+  .handle a{text-decoration:none}
+  .tagline{margin:0 auto;max-width:320px;color:var(--ink-2);font-size:15px;word-break:keep-all}
+  .place{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--green);background:var(--green-soft);padding:6px 12px;border-radius:999px;font-weight:600}
+
+  /* ---------- quick links ---------- */
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 8px}
+  .quick a{
+    display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:12px 8px;font-size:12.5px;font-weight:600;color:var(--ink-2);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .quick a:active{transform:scale(.97)}
+  .quick svg{width:22px;height:22px}
+
+  /* ---------- sections ---------- */
+  .sec{margin-top:30px}
+  .sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:0 4px 12px}
+  .sec-h h2{margin:0;font-size:17px;font-weight:800;letter-spacing:-.01em}
+  .sec-h span{font-size:12.5px;color:var(--ink-3)}
+
+  /* ---------- program cards ---------- */
+  .cards{display:flex;flex-direction:column;gap:16px}
+  .card{
+    background:var(--surface);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);border:1px solid var(--line);
+  }
+  .card-media{position:relative;height:150px;background:var(--bg-2)}
+  .card-media img{width:100%;height:100%;object-fit:cover;display:block}
+  .card-media.grad{display:grid;place-items:center;overflow:hidden}
+  .card-media.grad .big{font-size:64px;line-height:1;filter:drop-shadow(0 6px 12px rgba(0,0,0,.18))}
+  .card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.35) 100%)}
+  .badge{
+    position:absolute;top:12px;left:12px;z-index:1;
+    font-size:11.5px;font-weight:700;letter-spacing:.02em;padding:5px 10px;border-radius:999px;
+    background:rgba(255,255,255,.92);color:var(--ink);backdrop-filter:blur(6px);
+  }
+  .badge.open{background:var(--orange);color:#fff}
+  .badge.open::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#fff;margin-right:6px;animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .badge.notify{background:var(--green);color:#fff}
+  .badge.inquiry{background:var(--blue);color:#fff}
+  .tag{position:absolute;right:12px;bottom:10px;z-index:1;color:#fff;font-size:12.5px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+  .card-body{padding:16px 18px 18px}
+  .card-body h3{margin:0 0 4px;font-size:19px;font-weight:800;letter-spacing:-.02em;word-break:keep-all}
+  .card-body .sub{margin:0 0 12px;color:var(--ink-2);font-size:14px;word-break:keep-all}
+  .meta{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:5px}
+  .meta li{display:flex;gap:8px;font-size:13.5px;color:var(--ink-2)}
+  .meta li .i{flex:0 0 18px;text-align:center}
+  .btn{
+    width:100%;border:0;border-radius:14px;padding:14px 16px;font-weight:800;font-size:15.5px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    transition:transform .12s ease, filter .12s ease;
+  }
+  .btn:active{transform:scale(.985);filter:brightness(.95)}
+  .btn-primary{background:var(--orange);color:#fff;box-shadow:0 8px 18px -8px rgba(232,99,10,.7)}
+  .btn-green{background:var(--green);color:#fff;box-shadow:0 8px 18px -8px rgba(46,125,50,.6)}
+  .btn-blue{background:var(--blue);color:#fff;box-shadow:0 8px 18px -8px rgba(0,71,171,.55)}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line-strong);color:var(--ink-2)}
+  .note{margin:10px 0 0;font-size:12px;color:var(--ink-3);text-align:center}
+
+  /* ---------- footer ---------- */
+  .foot{margin-top:40px;text-align:center;color:var(--ink-3);font-size:12px;line-height:1.7}
+  .foot a{color:var(--ink-2)}
+
+  /* ---------- bottom sheet ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(35,26,18,.45);opacity:0;pointer-events:none;transition:opacity .22s;z-index:50}
+  .overlay.on{opacity:1;pointer-events:auto}
+  .sheet{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    max-width:var(--maxw);margin:0 auto;background:var(--surface);
+    border-radius:24px 24px 0 0;max-height:92dvh;overflow:auto;
+    transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);
+    padding:10px 20px calc(24px + env(safe-area-inset-bottom));
+    box-shadow:0 -10px 40px rgba(0,0,0,.18);
+  }
+  .sheet.on{transform:translateY(0)}
+  .grip{width:40px;height:5px;border-radius:5px;background:var(--line-strong);margin:4px auto 14px}
+  .sheet-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px}
+  .sheet-h h3{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em}
+  .sheet-h p{margin:4px 0 0;font-size:13px;color:var(--ink-3)}
+  .x{border:0;background:var(--bg);width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;flex:0 0 auto}
+  form{margin-top:12px}
+  .f{margin-bottom:14px}
+  .f label{display:block;font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:6px}
+  .f label .req{color:var(--orange);margin-left:2px}
+  .f input,.f select,.f textarea{
+    width:100%;border:1.5px solid var(--line-strong);border-radius:12px;padding:12px 14px;font:inherit;font-size:16px;
+    background:#FFFDFB;color:var(--ink);outline:none;transition:border-color .15s, box-shadow .15s;
+  }
+  .f input:focus,.f select:focus,.f textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
+  .f textarea{min-height:84px;resize:vertical}
+  .f select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C4E40' stroke-width='2.2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:40px}
+  .f .help{font-size:12px;color:var(--ink-3);margin-top:5px}
+  .seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px}
+  .seg label{position:relative;margin:0;cursor:pointer}
+  .seg input{position:absolute;opacity:0;width:0;height:0}
+  .seg span{display:block;text-align:center;border:1.5px solid var(--line-strong);border-radius:12px;padding:11px 8px;font-size:14px;font-weight:600;color:var(--ink-2);background:#FFFDFB;word-break:keep-all}
+  .seg input:checked + span{border-color:var(--orange);background:var(--orange-soft);color:var(--orange-deep)}
+  .seg input:focus-visible + span{box-shadow:0 0 0 3px var(--orange-soft)}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--ink-2);margin:4px 0 16px}
+  .agree input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--orange);flex:0 0 auto}
+  .submit-row{display:flex;flex-direction:column;gap:8px}
+  .btn[disabled]{opacity:.6;cursor:progress}
+  .done{text-align:center;padding:26px 6px 10px}
+  .done .ico{width:64px;height:64px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:0 auto 14px;font-size:30px}
+  .done h3{margin:0 0 6px;font-size:20px}
+  .done p{margin:0 0 18px;color:var(--ink-2);font-size:14px;word-break:keep-all}
+  .err{background:#FDECEC;color:#9B1C1C;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px;display:none}
+  .err.on{display:block}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="profile">
+    <div class="avatar" aria-hidden="true">탐</div>
+    <h1 class="name">탐라그라운드</h1>
+    <p class="handle"><a href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener">@tamnaground</a></p>
+    <p class="tagline">조선으로 떠나는 제주 이색 체험,<br>놀이로 배우는 제주어 🍊</p>
+    <div class="place">📍 제주 성읍민속마을</div>
+  </header>
+
+  <nav class="quick" aria-label="빠른 연락">
+    <a href="https://ig.me/m/tamnaground" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#E8630A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="#E8630A" stroke="none"/></svg>
+      인스타 DM
+    </a>
+    <a href="tel:010-4023-8081">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>
+      전화 문의
+    </a>
+    <a href="mailto:hepyhae@naver.com?subject=%5B%ED%83%90%EB%9D%BC%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%5D%20%EB%AC%B8%EC%9D%98">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0047AB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/></svg>
+      이메일
+    </a>
+  </nav>
+
+  <section class="sec" aria-labelledby="h-programs">
+    <div class="sec-h"><h2 id="h-programs">프로그램 신청</h2><span>버튼을 누르면 바로 신청돼요</span></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <footer class="foot">
+    <p>탐라그라운드 · 대표 계유진 · 제주 성읍민속마을<br>
+    <a href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener">@tamnaground</a> · <a href="mailto:hepyhae@naver.com">hepyhae@naver.com</a></p>
+    <p>신청 시 입력한 정보는 해당 프로그램 안내·운영 목적으로만 사용하고, 프로그램 종료 후 파기합니다.</p>
+  </footer>
+</div>
+
+<!-- bottom sheet -->
+<div class="overlay" id="overlay"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="grip"></div>
+  <div id="sheet-content"></div>
+</div>
+
+<script>
+/* =========================================================
+   설정 — 여기만 고치면 됩니다
+   ========================================================= */
+// Apps Script 웹앱 URL (README 3단계). 비워두면 신청 버튼이 DM/이메일 안내로 대체됩니다.
+const ENDPOINT = "";
+
+const PROGRAMS = [
+  {
+    id: "biyang",
+    status: "open",                       // open: 모집 중 / notify: 다음 회차 알림 / inquiry: 문의
+    badge: "9월 모집 중",
+    tag: "비양도 · 9/12(토) · 9/13(일)",
+    image: "assets/biyang.jpg",
+    title: "비양도 어린왕자",
+    sub: "B612로 돌아간 어린왕자가 지구별 'B양도'에 남긴 흔적을 찾아 걷는 하루",
+    meta: [
+      ["⏰", "11:30 한림항 집결 → 15:45 종료"],
+      ["🍚", "비양도 안 점심 + 왕복 배삯 포함"],
+      ["💙", "참가비 45,000원 (9월 한정)"],
+      ["👥", "회차당 15명 선착순 · 『어린왕자』 책 지참"],
+    ],
+    cta: "비양도 어린왕자 신청하기",
+    btn: "btn-primary",
+    fields: [
+      { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동" },
+      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000", help:"확정 안내를 문자로 드려요" },
+      { k:"date",  label:"참가 날짜", type:"seg", req:true, opts:["9/12 (토)","9/13 (일)","둘 다 가능"] },
+      { k:"people",label:"인원", type:"seg", req:true, opts:["1명","2명","3명","4명 이상"] },
+      { k:"companions", label:"동반자 이름", type:"text", ph:"2명 이상이면 함께 오는 분 이름", help:"본인 포함 인원이 2명 이상일 때만" },
+      { k:"note",  label:"요청사항", type:"textarea", ph:"알레르기·코스프레 참여 여부 등 자유롭게" },
+    ],
+    doneMsg: "확인 후 문자로 입금 안내와 확정 안내를 드릴게요. 회차당 15명 선착순이라 안내는 빠르게 갈 거예요 💙",
+  },
+  {
+    id: "escape",
+    status: "notify",
+    badge: "다음 회차 알림",
+    tag: "성읍민속마을 · 야외 방탈출",
+    image: "assets/seongeup.jpg",
+    title: "조선으로 떠나는 야외 방탈출",
+    sub: "600년 된 성읍민속마을이 통째로 게임판. 돌담 사이 단서를 찾아 마을을 탈출하세요",
+    meta: [
+      ["🗓️", "다음 회차 준비 중 — 알림 신청하면 오픈 즉시 먼저 알려드려요"],
+      ["⏱️", "약 2시간 · 청년 / 가족 / 전연령 회차 운영"],
+      ["💰", "참가비 20,000원 (간식 제공)"],
+      ["👟", "편한 복장 · 운동화 필수"],
+    ],
+    cta: "다음 회차 알림 신청",
+    btn: "btn-green",
+    fields: [
+      { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동" },
+      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000" },
+      { k:"type",  label:"희망 회차", type:"seg", req:true, opts:["청년 (19~39)","가족 (초2↑)","전연령","상관없음"] },
+      { k:"people",label:"예상 인원", type:"seg", opts:["1~2명","3~4명","5명 이상"] },
+      { k:"when",  label:"희망 시기", type:"text", ph:"예: 9월 주말, 10월 초" },
+      { k:"note",  label:"메모", type:"textarea", ph:"궁금한 점이 있으면 적어주세요" },
+    ],
+    doneMsg: "다음 회차 일정이 잡히면 문자로 가장 먼저 알려드릴게요 🔓",
+  },
+  {
+    id: "tamtam",
+    status: "inquiry",
+    badge: "학교·단체 문의",
+    tag: "제주어 보드게임 · KC 인증 · 특허 출원",
+    emoji: "🎲",
+    grad: "linear-gradient(135deg,#FFB067 0%,#E8630A 60%,#B84A00 100%)",
+    title: "탐탐판놀이 수업 · 구매",
+    sub: "카드를 조합해 제주어 문장을 완성하는 보드게임. 학급 수업·제주어 주간 행사·단체 체험에 바로 쓸 수 있어요",
+    meta: [
+      ["🏫", "초·중·고 전 학년 · 1모둠 2~4명"],
+      ["📦", "1세트 43,000원 · 학교 4+1 혜택 (4세트 구매 시 1세트 증정)"],
+      ["👩‍🏫", "찾아가는 제주어 수업 진행 가능"],
+      ["📅", "10월 제주어 주간 대비 9월 중 주문 권장"],
+    ],
+    cta: "수업 · 구매 문의하기",
+    btn: "btn-blue",
+    fields: [
+      { k:"org",   label:"학교 · 단체명", type:"text", req:true, ph:"○○초등학교" },
+      { k:"name",  label:"담당자 이름", type:"text", req:true, ph:"담당 선생님 성함" },
+      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000" },
+      { k:"email", label:"이메일", type:"email", ph:"견적서·소개서 받으실 주소" },
+      { k:"kind",  label:"문의 유형", type:"seg", req:true, opts:["보드게임 구매","수업 진행","구매 + 수업"] },
+      { k:"size",  label:"예상 인원 · 수량", type:"text", ph:"예: 한 학급 24명 / 5세트" },
+      { k:"when",  label:"희망 시기", type:"text", ph:"예: 10월 둘째 주" },
+      { k:"note",  label:"메모", type:"textarea", ph:"공문·견적서 필요 여부 등" },
+    ],
+    doneMsg: "확인 후 견적서와 제품 소개서를 보내드릴게요. 공문이 필요하시면 함께 준비합니다 📦",
+  },
+  {
+    id: "havruta",
+    status: "inquiry",
+    badge: "수업 · 강연 문의",
+    tag: "한국하브루타협회 제주센터",
+    emoji: "💬",
+    grad: "linear-gradient(135deg,#7BC47F 0%,#2E7D32 60%,#1B5E20 100%)",
+    title: "하브루타 수업 · 강연",
+    sub: "질문하고 대화하며 함께 성장하는 하브루타. 부모 교육, 교사 연수, 학생 수업, 기관 강연을 진행합니다",
+    meta: [
+      ["👨‍👩‍👧", "부모 교육 · 가족 하브루타"],
+      ["🏫", "교사 직무연수 · 학생 수업"],
+      ["🎤", "기관 · 단체 특강"],
+    ],
+    cta: "하브루타 문의하기",
+    btn: "btn-green",
+    fields: [
+      { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동" },
+      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000" },
+      { k:"org",   label:"소속 (선택)", type:"text", ph:"학교·기관·단체명" },
+      { k:"kind",  label:"관심 분야", type:"seg", req:true, opts:["부모 교육","교사 연수","학생 수업","강연 · 특강"] },
+      { k:"size",  label:"예상 인원", type:"text", ph:"예: 20명" },
+      { k:"note",  label:"메모", type:"textarea", ph:"희망 시기, 주제 등" },
+    ],
+    doneMsg: "확인 후 연락드려 일정과 내용을 함께 정할게요 💬",
+  },
+];
+
+/* ========================================================= */
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function renderCards(){
+  $("#cards").innerHTML = PROGRAMS.map(p => `
+    <article class="card" id="card-${p.id}">
+      <div class="card-media ${p.image ? "" : "grad"}" ${p.grad ? `style="background:${p.grad}"` : ""}>
+        ${p.image ? `<img src="${p.image}" alt="" loading="lazy">` : `<div class="big" aria-hidden="true">${p.emoji || "🍊"}</div>`}
+        <span class="badge ${p.status}">${esc(p.badge)}</span>
+        <span class="tag">${esc(p.tag)}</span>
+      </div>
+      <div class="card-body">
+        <h3>${esc(p.title)}</h3>
+        <p class="sub">${esc(p.sub)}</p>
+        <ul class="meta">${p.meta.map(([i,t]) => `<li><span class="i">${i}</span><span>${esc(t)}</span></li>`).join("")}</ul>
+        <button class="btn ${p.btn}" data-open="${p.id}">${esc(p.cta)} →</button>
+      </div>
+    </article>`).join("");
+}
+
+function fieldHTML(f){
+  const req = f.req ? `<span class="req">*</span>` : "";
+  const help = f.help ? `<div class="help">${esc(f.help)}</div>` : "";
+  if (f.type === "seg"){
+    return `<div class="f"><label>${esc(f.label)}${req}</label><div class="seg">
+      ${f.opts.map((o,i) => `<label><input type="radio" name="${f.k}" value="${esc(o)}" ${f.req ? "required" : ""}><span>${esc(o)}</span></label>`).join("")}
+    </div>${help}</div>`;
+  }
+  if (f.type === "textarea"){
+    return `<div class="f"><label for="f-${f.k}">${esc(f.label)}${req}</label><textarea id="f-${f.k}" name="${f.k}" placeholder="${esc(f.ph||"")}" ${f.req?"required":""}></textarea>${help}</div>`;
+  }
+  const extra = f.type === "tel" ? `inputmode="tel" autocomplete="tel"` : f.type === "email" ? `inputmode="email" autocomplete="email"` : f.k === "name" ? `autocomplete="name"` : "";
+  return `<div class="f"><label for="f-${f.k}">${esc(f.label)}${req}</label><input id="f-${f.k}" type="${f.type}" name="${f.k}" placeholder="${esc(f.ph||"")}" ${extra} ${f.req?"required":""}>${help}</div>`;
+}
+
+function openSheet(id){
+  const p = PROGRAMS.find(x => x.id === id); if (!p) return;
+  const c = $("#sheet-content");
+  const subtitle = p.status === "open" ? "선착순 접수 · 확인 후 문자 안내" : p.status === "notify" ? "오픈 즉시 문자로 알려드려요" : "확인 후 연락드립니다";
+
+  if (!ENDPOINT){
+    // 백엔드 미연결 상태 — DM/이메일로 안내
+    const mail = `mailto:hepyhae@naver.com?subject=${encodeURIComponent(`[${p.title}] 신청/문의`)}&body=${encodeURIComponent(p.fields.map(f => `${f.label}: `).join("\n"))}`;
+    c.innerHTML = `
+      <div class="sheet-h"><div><h3 id="sheet-title">${esc(p.title)}</h3><p>${subtitle}</p></div><button class="x" data-close aria-label="닫기">✕</button></div>
+      <p style="font-size:14px;color:var(--ink-2);margin:10px 0 14px;word-break:keep-all">아래 내용을 인스타 DM이나 이메일로 보내주시면 바로 접수돼요.</p>
+      <ul class="meta" style="margin-bottom:18px">${p.fields.filter(f=>f.req).map(f => `<li><span class="i">·</span><span>${esc(f.label)}</span></li>`).join("")}</ul>
+      <div class="submit-row">
+        <a class="btn btn-primary" style="text-decoration:none" href="https://ig.me/m/tamnaground" target="_blank" rel="noopener">인스타 DM으로 보내기</a>
+        <a class="btn btn-ghost" style="text-decoration:none" href="${mail}">이메일로 보내기</a>
+      </div>`;
+  } else {
+    c.innerHTML = `
+      <div class="sheet-h"><div><h3 id="sheet-title">${esc(p.title)}</h3><p>${subtitle}</p></div><button class="x" data-close aria-label="닫기">✕</button></div>
+      <form id="form" novalidate>
+        <div class="err" id="err"></div>
+        ${p.fields.map(fieldHTML).join("")}
+        <div class="hp" aria-hidden="true"><label>회사명<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+        <label class="agree"><input type="checkbox" name="agree" required><span>입력한 정보를 <b>${esc(p.title)}</b> 안내·운영 목적으로만 사용하는 데 동의합니다.</span></label>
+        <div class="submit-row">
+          <button type="submit" class="btn ${p.btn}" id="submit">${p.status === "open" ? "신청 완료하기" : p.status === "notify" ? "알림 신청하기" : "문의 보내기"}</button>
+          <button type="button" class="btn btn-ghost" data-close>닫기</button>
+        </div>
+      </form>`;
+    $("#form").addEventListener("submit", e => submit(e, p));
+  }
+
+  $("#overlay").classList.add("on"); $("#sheet").classList.add("on");
+  document.body.style.overflow = "hidden";
+  $("#sheet").scrollTop = 0;
+  setTimeout(() => { const first = $("#sheet input:not([type=radio]):not([type=checkbox])"); first && first.focus({preventScroll:true}); }, 320);
+}
+
+function closeSheet(){
+  $("#overlay").classList.remove("on"); $("#sheet").classList.remove("on");
+  document.body.style.overflow = "";
+}
+
+async function submit(e, p){
+  e.preventDefault();
+  const form = e.target, err = $("#err");
+  err.classList.remove("on");
+
+  // 필수 검증
+  const data = { program: p.id, programTitle: p.title, source: location.href, ua: navigator.userAgent };
+  for (const f of p.fields){
+    const v = f.type === "seg" ? (form.querySelector(`input[name="${f.k}"]:checked`)?.value || "") : (form.elements[f.k]?.value || "").trim();
+    if (f.req && !v){ err.textContent = `${f.label}을(를) 입력해 주세요.`; err.classList.add("on"); err.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+    data[f.k] = v;
+  }
+  if (data.phone){
+    const d = data.phone.replace(/\D/g, "");
+    const okPhone = /^0\d{8,10}$/.test(d) && !(d.startsWith("010") && d.length !== 11);
+    if (!okPhone){ err.textContent = "연락처 형식을 확인해 주세요. (예: 010-1234-5678)"; err.classList.add("on"); return; }
+  }
+  if (!form.elements.agree.checked){ err.textContent = "정보 이용에 동의해 주세요."; err.classList.add("on"); return; }
+  if (form.elements.company.value){ showDone(p); return; } // 봇 — 조용히 무시
+
+  const btn = $("#submit"); btn.disabled = true; btn.textContent = "보내는 중…";
+  try {
+    let ok = false;
+    try {
+      const r = await fetch(ENDPOINT, { method:"POST", body: JSON.stringify(data) }); // text/plain → simple request, CORS 프리플라이트 없음
+      const j = await r.json().catch(() => ({}));
+      ok = r.ok && j.ok !== false;
+      if (!ok && j.error) throw new Error(j.error);
+    } catch (inner) {
+      // 응답을 못 읽는 환경(일부 인앱 브라우저) — no-cors 재시도, 응답은 불투명하므로 성공으로 간주
+      await fetch(ENDPOINT, { method:"POST", mode:"no-cors", body: JSON.stringify(data) });
+      ok = true;
+    }
+    if (ok) showDone(p); else throw new Error("fail");
+  } catch (ex) {
+    btn.disabled = false; btn.textContent = "다시 시도";
+    err.innerHTML = `전송에 실패했어요. 잠시 후 다시 시도하거나 <a href="https://ig.me/m/tamnaground" target="_blank" rel="noopener">인스타 DM</a>으로 보내주세요.`;
+    err.classList.add("on");
+  }
+}
+
+function showDone(p){
+  $("#sheet-content").innerHTML = `
+    <div class="done">
+      <div class="ico">✓</div>
+      <h3>${p.status === "open" ? "신청이 접수됐어요!" : p.status === "notify" ? "알림 신청 완료!" : "문의가 접수됐어요!"}</h3>
+      <p>${esc(p.doneMsg)}</p>
+      <div class="submit-row">
+        <a class="btn btn-primary" style="text-decoration:none" href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener">인스타에서 소식 받기</a>
+        <button type="button" class="btn btn-ghost" data-close>닫기</button>
+      </div>
+    </div>`;
+  $("#sheet").scrollTop = 0;
+}
+
+document.addEventListener("click", e => {
+  const o = e.target.closest("[data-open]"); if (o){ openSheet(o.dataset.open); return; }
+  if (e.target.closest("[data-close]") || e.target === $("#overlay")) closeSheet();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
+
+renderCards();
+// ?p=biyang 처럼 링크로 특정 프로그램 폼을 바로 열 수 있어요 (카드뉴스 CTA용)
+const qp = new URLSearchParams(location.search).get("p");
+if (qp && PROGRAMS.some(x => x.id === qp)) setTimeout(() => openSheet(qp), 250);
+</script>
+</body>
+</html>
