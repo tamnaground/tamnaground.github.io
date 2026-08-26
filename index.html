@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>탐라그라운드 · 프로그램 신청</title>
-<meta name="description" content="조선으로 떠나는 제주 이색 체험, 탐라그라운드. 비양도 어린왕자·성읍 야외 방탈출·탐탐판놀이 프로그램 신청 페이지">
+<meta name="description" content="제주어 놀이 기반 제주문화 이색 체험, 탐라그라운드. 비양도·성읍·교래리 프로그램 신청 페이지">
 <meta property="og:title" content="탐라그라운드 · 프로그램 신청">
-<meta property="og:description" content="비양도 어린왕자 · 성읍민속마을 야외 방탈출 · 제주어 보드게임 탐탐판놀이 — 여기서 바로 신청하세요">
+<meta property="og:description" content="비양도 어린왕자를 찾아서 · 성읍 방탈출 · 교래리 오감체험 — 여기서 바로 신청하세요">
 <meta property="og:image" content="https://tamnaground.github.io/assets/biyang.jpg">
 <meta name="theme-color" content="#FFF4EA">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23E8630A'/><text x='50' y='66' font-size='46' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>탐</text></svg>">
@@ -88,7 +88,8 @@
   .badge.open{background:var(--orange);color:#fff}
   .badge.open::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#fff;margin-right:6px;animation:pulse 1.6s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .badge.notify{background:var(--green);color:#fff}
+  .badge.open.g{background:var(--green)}
+  .badge.soon{background:rgba(255,255,255,.92);color:var(--ink-2)}
   .badge.inquiry{background:var(--blue);color:#fff}
   .tag{position:absolute;right:12px;bottom:10px;z-index:1;color:#fff;font-size:12.5px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.4)}
   .card-body{padding:16px 18px 18px}
@@ -108,6 +109,12 @@
   .btn-blue{background:var(--blue);color:#fff;box-shadow:0 8px 18px -8px rgba(0,71,171,.55)}
   .btn-ghost{background:transparent;border:1.5px solid var(--line-strong);color:var(--ink-2)}
   .note{margin:10px 0 0;font-size:12px;color:var(--ink-3);text-align:center}
+
+  /* 10월 예정 카드 */
+  .card.soon{box-shadow:none;background:rgba(255,255,255,.65)}
+  .card.soon .card-media{height:112px}
+  .card.soon .card-media.grad .big{font-size:48px}
+  .soon-note{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-3);background:var(--bg);border-radius:12px;padding:10px 12px}
 
   /* ---------- footer ---------- */
   .foot{margin-top:40px;text-align:center;color:var(--ink-3);font-size:12px;line-height:1.7}
@@ -140,9 +147,8 @@
   }
   .f input:focus,.f select:focus,.f textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
   .f textarea{min-height:84px;resize:vertical}
-  .f select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C4E40' stroke-width='2.2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:40px}
   .f .help{font-size:12px;color:var(--ink-3);margin-top:5px}
-  .seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px}
+  .seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
   .seg label{position:relative;margin:0;cursor:pointer}
   .seg input{position:absolute;opacity:0;width:0;height:0}
   .seg span{display:block;text-align:center;border:1.5px solid var(--line-strong);border-radius:12px;padding:11px 8px;font-size:14px;font-weight:600;color:var(--ink-2);background:#FFFDFB;word-break:keep-all}
@@ -159,6 +165,11 @@
   .done p{margin:0 0 18px;color:var(--ink-2);font-size:14px;word-break:keep-all}
   .err{background:#FDECEC;color:#9B1C1C;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px;display:none}
   .err.on{display:block}
+  .consent{font-size:12px;color:var(--ink-3);line-height:1.5;margin:0 0 8px;word-break:keep-all;display:block;font-weight:500}
+  .pay{background:var(--bg);border-radius:14px;padding:12px 14px;margin:10px 0 4px}
+  .pay-row{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:var(--ink-2);padding:3px 0}
+  .pay-row b{color:var(--ink);text-align:right}
+  .copy{margin-top:8px;border:1.5px solid var(--line-strong);background:#fff;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:700;color:var(--ink-2);cursor:pointer;width:100%}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -169,8 +180,8 @@
     <div class="avatar" aria-hidden="true">탐</div>
     <h1 class="name">탐라그라운드</h1>
     <p class="handle"><a href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener">@tamnaground</a></p>
-    <p class="tagline">조선으로 떠나는 제주 이색 체험,<br>놀이로 배우는 제주어 🍊</p>
-    <div class="place">📍 제주 성읍민속마을</div>
+    <p class="tagline">제주어 놀이 기반<br>제주문화 이색 체험 🍊</p>
+    <div class="place">📍 비양도 · 성읍민속마을 · 교래리</div>
   </header>
 
   <nav class="quick" aria-label="빠른 연락">
@@ -188,9 +199,19 @@
     </a>
   </nav>
 
-  <section class="sec" aria-labelledby="h-programs">
-    <div class="sec-h"><h2 id="h-programs">프로그램 신청</h2><span>버튼을 누르면 바로 신청돼요</span></div>
-    <div class="cards" id="cards"></div>
+  <section class="sec" aria-labelledby="h-open">
+    <div class="sec-h"><h2 id="h-open">9월 프로그램 · 신청 접수 중</h2><span>버튼을 누르면 바로 신청돼요</span></div>
+    <div class="cards" id="cards-open"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-soon">
+    <div class="sec-h"><h2 id="h-soon">10월 예정</h2><span>신청 오픈은 인스타에서 안내</span></div>
+    <div class="cards" id="cards-soon"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-inq">
+    <div class="sec-h"><h2 id="h-inq">학교 · 단체</h2></div>
+    <div class="cards" id="cards-inquiry"></div>
   </section>
 
   <footer class="foot">
@@ -209,183 +230,226 @@
 
 <script>
 /* =========================================================
-   설정 — 여기만 고치면 됩니다
+   접수 설정 — 프로그램별 Google Forms 직접 연결
+   (formResponse 주소 + 질문별 entry ID. README 참고)
    ========================================================= */
-// Apps Script 웹앱 URL (README 3단계). 비워두면 신청 버튼이 DM/이메일 안내로 대체됩니다.
-const ENDPOINT = "";
+const GFORM_ENTRY = {   // 세 폼 모두 같은 질문 구성(사본)이라 entry ID가 동일
+  name: "entry.1324470836", phone: "entry.1981181365", date: "entry.2040371820",
+  payer: "entry.652419604", payStatus: "entry.7882954", source: "entry.1132267440",
+  privacy: "entry.454222183", portrait: "entry.566435667", refund: "entry.882807117",
+};
+const GFORMS = {
+  "biyang-prince":   { action: "https://docs.google.com/forms/d/e/1FAIpQLScn8il26QrOc5Tte3xHoFblGZ6QlS5RrD13FbXgmO2_o2MDpQ/formResponse", entry: GFORM_ENTRY },
+  "gyorae-hajungdo": { action: "", entry: GFORM_ENTRY },   // 게시 후 /d/e/ 주소 입력
+  "seongeup-escape": { action: "", entry: GFORM_ENTRY },   // 게시 후 /d/e/ 주소 입력
+};
+const BANK = "농협 352-2232-4044-73 (ㄱㅇㅈ)";
 
+// 공통 신청 항목 (구글폼과 동일) — dateOpts만 프로그램별로 다름
+const applyFields = (dateOpts) => [
+  { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동", autocomplete:"name" },
+  { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000", help:"신청 확인 및 안내 연락에 사용돼요" },
+  ...(dateOpts.length > 1 ? [{ k:"date", label:"희망 날짜", type:"seg", req:true, opts:dateOpts }] : []),
+  { k:"payer", label:"입금자명", type:"text", req:true, ph:"입금하실 분 성함", help:"신청자명과 다를 경우 꼭 입금자명을 적어주세요 (입금 확인용)" },
+  { k:"payStatus", label:"입금 예정", type:"seg", req:true, opts:["입금 완료","금일 중 입금 예정","1-2일 후 입금 예정"] },
+  { k:"source", label:"어떻게 알게 되셨나요?", type:"seg", req:true, opts:["인스타그램 광고","인스타그램 게시물/릴스","지인 추천","기타"] },
+  { k:"privacy", type:"check", req:true, value:"동의합니다", label:"개인정보 수집·이용 동의 (필수)",
+    text:"수집 항목: 성함, 연락처, 입금자명 · 목적: 신청·입금 확인, 행사 안내 · 보유 기간: 행사 종료 후 3개월, 이후 파기. 거부 시 신청 접수가 어려워요." },
+  { k:"portrait", type:"seg", req:true, label:"초상권 및 콘텐츠 활용 동의",
+    text:"행사 중 촬영된 사진·영상에 본인의 모습이 포함될 수 있으며, 탐라그라운드 홍보(인스타그램·유튜브·블로그, 온라인 광고, 홍보물)에 무상으로 활용됩니다. 철회 요청 시까지.",
+    opts:[ {v:"동의합니다 (쵤영 및 홍보 활용에 동의)", l:"동의합니다"}, {v:"동의하지 않습니다(촬영시 홍보에서 제외요청)", l:"홍보에서 제외해 주세요"} ] },
+  { k:"refund", type:"check", req:true, value:"위 환불 규정에 동의합니다.", label:"환불 규정 동의 (필수)",
+    text:"행사 4일 전까지 취소: 전액 환불 · 행사 3일 전 ~ 당일 취소: 환불 불가 · 천재지변·주최측 사정으로 취소 시: 전액 환불" },
+];
+
+/* =========================================================
+   프로그램 목록 — 여기만 고치면 됩니다
+   status: open(신청 접수) / soon(예정, 폼 없음) / inquiry(문의)
+   ========================================================= */
 const PROGRAMS = [
   {
-    id: "biyang",
-    status: "open",                       // open: 모집 중 / notify: 다음 회차 알림 / inquiry: 문의
-    badge: "9월 모집 중",
-    tag: "비양도 · 9/12(토) · 9/13(일)",
+    id: "biyang-prince", status: "open",
+    badge: "9월 모집 중", tag: "비양도 · 9/12(토) · 9/13(일)",
     image: "assets/biyang.jpg",
-    title: "비양도 어린왕자",
-    sub: "B612로 돌아간 어린왕자가 지구별 'B양도'에 남긴 흔적을 찾아 걷는 하루",
+    title: "비양도, 어린왕자를 찾아서",
+    sub: "B612로 돌아간 어린왕자가 지구별 'B양도'에 남긴 흔적을 책 속 장면을 단서 삼아 찾아 걷는 하루",
     meta: [
-      ["⏰", "11:30 한림항 집결 → 15:45 종료"],
+      ["⏰", "11:30 한림항 매표소 집결 → 16:00 종료"],
       ["🍚", "비양도 안 점심 + 왕복 배삯 포함"],
       ["💙", "참가비 45,000원 (9월 한정)"],
       ["👥", "회차당 15명 선착순 · 『어린왕자』 책 지참"],
+      ["📌", "신청 마감 9/8(화) · 확정자 개별 연락"],
     ],
-    cta: "비양도 어린왕자 신청하기",
-    btn: "btn-primary",
-    fields: [
-      { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동" },
-      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000", help:"확정 안내를 문자로 드려요" },
-      { k:"date",  label:"참가 날짜", type:"seg", req:true, opts:["9/12 (토)","9/13 (일)","둘 다 가능"] },
-      { k:"people",label:"인원", type:"seg", req:true, opts:["1명","2명","3명","4명 이상"] },
-      { k:"companions", label:"동반자 이름", type:"text", ph:"2명 이상이면 함께 오는 분 이름", help:"본인 포함 인원이 2명 이상일 때만" },
-      { k:"note",  label:"요청사항", type:"textarea", ph:"알레르기·코스프레 참여 여부 등 자유롭게" },
-    ],
-    doneMsg: "확인 후 문자로 입금 안내와 확정 안내를 드릴게요. 회차당 15명 선착순이라 안내는 빠르게 갈 거예요 💙",
+    cta: "비양도 어린왕자 신청하기", btn: "btn-primary", price: "1인 45,000원",
+    fields: applyFields(["9월 12일 토요일","9월 13일 일요일"]),
+    doneMsg: "입금 확인 후 문자로 확정 안내를 드릴게요. 회차당 15명 선착순이라 안내는 빠르게 갈 거예요 💙",
   },
   {
-    id: "escape",
-    status: "notify",
-    badge: "다음 회차 알림",
-    tag: "성읍민속마을 · 야외 방탈출",
-    image: "assets/seongeup.jpg",
-    title: "조선으로 떠나는 야외 방탈출",
-    sub: "600년 된 성읍민속마을이 통째로 게임판. 돌담 사이 단서를 찾아 마을을 탈출하세요",
+    id: "gyorae-hajungdo", status: "open", theme: "green",
+    badge: "9월 모집 중", tag: "교래리 · 9/18(금) · 9/19(토)",
+    emoji: "🌿", grad: "linear-gradient(135deg,#8FD694 0%,#2E7D32 55%,#1B5E20 100%)",
+    title: "교래리 오감체험 「잃어버린 섬, 하중도」",
+    sub: "곶자왈 마을 교래리에서 사라진 섬 '하중도'의 흔적을 오감으로 찾아가는 체험",
     meta: [
-      ["🗓️", "다음 회차 준비 중 — 알림 신청하면 오픈 즉시 먼저 알려드려요"],
-      ["⏱️", "약 2시간 · 청년 / 가족 / 전연령 회차 운영"],
-      ["💰", "참가비 20,000원 (간식 제공)"],
+      ["⏰", "오전 9:30 – 12:00 (2시간 30분)"],
+      ["📍", "제주 조천읍 교래리"],
+      ["💚", "참가비 10,000원"],
+    ],
+    cta: "하중도 오감체험 신청하기", btn: "btn-green", price: "1인 10,000원",
+    fields: applyFields(["9월 18일 금요일","9월 19일 토요일"]),
+    doneMsg: "입금 확인 후 문자로 집결 장소와 준비물을 안내해 드릴게요 🌿",
+  },
+  {
+    id: "seongeup-escape", status: "open",
+    badge: "9월 모집 중", tag: "성읍민속마을 · 9/20(일)",
+    image: "assets/seongeup.jpg",
+    title: "성읍 방탈출 · 조선으로 떠나는 제주여행",
+    sub: "정의향교 행사 관람으로 시작해, 600년 된 성읍민속마을을 통째로 게임판 삼아 탈출하는 하루",
+    meta: [
+      ["🏛️", "10:00 정의향교 행사 관람"],
+      ["🍚", "12:00 고백소찬 점심 식사"],
+      ["🔓", "13:00 성읍 야외 방탈출 (약 2시간)"],
+      ["💰", "참가비 35,000원 (점심 포함)"],
       ["👟", "편한 복장 · 운동화 필수"],
     ],
-    cta: "다음 회차 알림 신청",
-    btn: "btn-green",
-    fields: [
-      { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동" },
-      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000" },
-      { k:"type",  label:"희망 회차", type:"seg", req:true, opts:["청년 (19~39)","가족 (초2↑)","전연령","상관없음"] },
-      { k:"people",label:"예상 인원", type:"seg", opts:["1~2명","3~4명","5명 이상"] },
-      { k:"when",  label:"희망 시기", type:"text", ph:"예: 9월 주말, 10월 초" },
-      { k:"note",  label:"메모", type:"textarea", ph:"궁금한 점이 있으면 적어주세요" },
+    cta: "성읍 방탈출 신청하기", btn: "btn-primary", price: "1인 35,000원",
+    fixed: { date: "9월 20일 일요일" },
+    fields: applyFields(["9월 20일 일요일"]),
+    doneMsg: "입금 확인 후 문자로 확정 안내와 집결 장소를 알려드릴게요 🔓",
+  },
+
+  /* ---------- 10월 예정 (폼 없음) ---------- */
+  {
+    id: "biyang-stay", status: "soon",
+    badge: "10월 예정", tag: "비양도 · 1박 2일",
+    image: "assets/biyang.jpg",
+    title: "마음을 비우고 양식을 채우는 섬, 비양도",
+    sub: "섬에서 하룻밤. 비우고 채우는 1박 2일 프로그램",
+    meta: [
+      ["🗓️", "1회차 10/9(금) – 10/10(토)"],
+      ["🗓️", "2회차 10/10(토) – 10/11(일)"],
     ],
-    doneMsg: "다음 회차 일정이 잡히면 문자로 가장 먼저 알려드릴게요 🔓",
   },
   {
-    id: "tamtam",
-    status: "inquiry",
-    badge: "학교·단체 문의",
-    tag: "제주어 보드게임 · KC 인증 · 특허 출원",
-    emoji: "🎲",
-    grad: "linear-gradient(135deg,#FFB067 0%,#E8630A 60%,#B84A00 100%)",
+    id: "gyorae-return", status: "soon", theme: "green",
+    badge: "10월 예정", tag: "교래리 · 10/16(금) · 10/17(토)",
+    emoji: "🏘️", grad: "linear-gradient(135deg,#8FD694 0%,#2E7D32 55%,#1B5E20 100%)",
+    title: "「사라진 마을의 귀환」",
+    sub: "잠든 수호신들을 깨워 마을을 지켜내는 미션 워크. 교래리사무소부터 약 2.5km를 걸으며 스팟별 미션을 풀고, 닭칼국수로 마무리",
+    meta: [
+      ["⏱️", "2시간 30분 · 약 2.5km 걷기"],
+      ["🍜", "닭칼국수 식사 포함"],
+      ["💚", "정가 50,000원 → 10월 한정 35,000원"],
+    ],
+  },
+
+  /* ---------- 문의 ---------- */
+  {
+    id: "tamtam", status: "inquiry",
+    badge: "학교·단체 문의", tag: "제주어 보드게임 · KC 인증 · 특허 출원",
+    emoji: "🎲", grad: "linear-gradient(135deg,#FFB067 0%,#E8630A 60%,#B84A00 100%)",
     title: "탐탐판놀이 수업 · 구매",
     sub: "카드를 조합해 제주어 문장을 완성하는 보드게임. 학급 수업·제주어 주간 행사·단체 체험에 바로 쓸 수 있어요",
     meta: [
       ["🏫", "초·중·고 전 학년 · 1모둠 2~4명"],
-      ["📦", "1세트 43,000원 · 학교 4+1 혜택 (4세트 구매 시 1세트 증정)"],
+      ["📦", "1세트 43,000원 · 학교 4+1 혜택"],
       ["👩‍🏫", "찾아가는 제주어 수업 진행 가능"],
-      ["📅", "10월 제주어 주간 대비 9월 중 주문 권장"],
     ],
-    cta: "수업 · 구매 문의하기",
-    btn: "btn-blue",
-    fields: [
-      { k:"org",   label:"학교 · 단체명", type:"text", req:true, ph:"○○초등학교" },
-      { k:"name",  label:"담당자 이름", type:"text", req:true, ph:"담당 선생님 성함" },
-      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000" },
-      { k:"email", label:"이메일", type:"email", ph:"견적서·소개서 받으실 주소" },
-      { k:"kind",  label:"문의 유형", type:"seg", req:true, opts:["보드게임 구매","수업 진행","구매 + 수업"] },
-      { k:"size",  label:"예상 인원 · 수량", type:"text", ph:"예: 한 학급 24명 / 5세트" },
-      { k:"when",  label:"희망 시기", type:"text", ph:"예: 10월 둘째 주" },
-      { k:"note",  label:"메모", type:"textarea", ph:"공문·견적서 필요 여부 등" },
-    ],
-    doneMsg: "확인 후 견적서와 제품 소개서를 보내드릴게요. 공문이 필요하시면 함께 준비합니다 📦",
-  },
-  {
-    id: "havruta",
-    status: "inquiry",
-    badge: "수업 · 강연 문의",
-    tag: "한국하브루타협회 제주센터",
-    emoji: "💬",
-    grad: "linear-gradient(135deg,#7BC47F 0%,#2E7D32 60%,#1B5E20 100%)",
-    title: "하브루타 수업 · 강연",
-    sub: "질문하고 대화하며 함께 성장하는 하브루타. 부모 교육, 교사 연수, 학생 수업, 기관 강연을 진행합니다",
-    meta: [
-      ["👨‍👩‍👧", "부모 교육 · 가족 하브루타"],
-      ["🏫", "교사 직무연수 · 학생 수업"],
-      ["🎤", "기관 · 단체 특강"],
-    ],
-    cta: "하브루타 문의하기",
-    btn: "btn-green",
-    fields: [
-      { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동" },
-      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000" },
-      { k:"org",   label:"소속 (선택)", type:"text", ph:"학교·기관·단체명" },
-      { k:"kind",  label:"관심 분야", type:"seg", req:true, opts:["부모 교육","교사 연수","학생 수업","강연 · 특강"] },
-      { k:"size",  label:"예상 인원", type:"text", ph:"예: 20명" },
-      { k:"note",  label:"메모", type:"textarea", ph:"희망 시기, 주제 등" },
-    ],
-    doneMsg: "확인 후 연락드려 일정과 내용을 함께 정할게요 💬",
+    cta: "수업 · 구매 문의하기", btn: "btn-blue",
+    contact: true,   // 폼 대신 DM·전화·이메일 안내
   },
 ];
 
 /* ========================================================= */
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const backendOf = p => (GFORMS[p.id] && GFORMS[p.id].action) ? GFORMS[p.id] : null;
 
-function renderCards(){
-  $("#cards").innerHTML = PROGRAMS.map(p => `
-    <article class="card" id="card-${p.id}">
+function cardHTML(p){
+  const media = p.image
+    ? `<img src="${p.image}" alt="" loading="lazy">`
+    : `<div class="big" aria-hidden="true">${p.emoji || "🍊"}</div>`;
+  const badgeCls = p.status === "open" ? `open ${p.theme === "green" ? "g" : ""}` : p.status;
+  const foot = p.status === "soon"
+    ? `<div class="soon-note">🔔 신청 오픈 시 <a href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink-2)">@tamnaground</a>에서 가장 먼저 안내해요</div>`
+    : `<button class="btn ${p.btn}" data-open="${p.id}">${esc(p.cta)} →</button>`;
+  return `
+    <article class="card ${p.status}" id="card-${p.id}">
       <div class="card-media ${p.image ? "" : "grad"}" ${p.grad ? `style="background:${p.grad}"` : ""}>
-        ${p.image ? `<img src="${p.image}" alt="" loading="lazy">` : `<div class="big" aria-hidden="true">${p.emoji || "🍊"}</div>`}
-        <span class="badge ${p.status}">${esc(p.badge)}</span>
+        ${media}
+        <span class="badge ${badgeCls}">${esc(p.badge)}</span>
         <span class="tag">${esc(p.tag)}</span>
       </div>
       <div class="card-body">
         <h3>${esc(p.title)}</h3>
         <p class="sub">${esc(p.sub)}</p>
         <ul class="meta">${p.meta.map(([i,t]) => `<li><span class="i">${i}</span><span>${esc(t)}</span></li>`).join("")}</ul>
-        <button class="btn ${p.btn}" data-open="${p.id}">${esc(p.cta)} →</button>
+        ${foot}
       </div>
-    </article>`).join("");
+    </article>`;
+}
+
+function renderCards(){
+  for (const [st, sel] of [["open","#cards-open"],["soon","#cards-soon"],["inquiry","#cards-inquiry"]]){
+    const list = PROGRAMS.filter(p => p.status === st);
+    const box = $(sel); box.innerHTML = list.map(cardHTML).join("");
+    box.closest(".sec").style.display = list.length ? "" : "none";
+  }
 }
 
 function fieldHTML(f){
   const req = f.req ? `<span class="req">*</span>` : "";
   const help = f.help ? `<div class="help">${esc(f.help)}</div>` : "";
+  const text = f.text ? `<div class="consent">${esc(f.text)}</div>` : "";
   if (f.type === "seg"){
-    return `<div class="f"><label>${esc(f.label)}${req}</label><div class="seg">
-      ${f.opts.map((o,i) => `<label><input type="radio" name="${f.k}" value="${esc(o)}" ${f.req ? "required" : ""}><span>${esc(o)}</span></label>`).join("")}
+    return `<div class="f"><label>${esc(f.label)}${req}</label>${text}<div class="seg">
+      ${f.opts.map(o => { const v = o.v ?? o, l = o.l ?? o; return `<label><input type="radio" name="${f.k}" value="${esc(v)}"><span>${esc(l)}</span></label>`; }).join("")}
     </div>${help}</div>`;
   }
-  if (f.type === "textarea"){
-    return `<div class="f"><label for="f-${f.k}">${esc(f.label)}${req}</label><textarea id="f-${f.k}" name="${f.k}" placeholder="${esc(f.ph||"")}" ${f.req?"required":""}></textarea>${help}</div>`;
+  if (f.type === "check"){
+    return `<div class="f"><label class="agree" style="margin:0"><input type="checkbox" name="${f.k}" value="${esc(f.value)}"><span><b>${esc(f.label)}</b>${f.text ? `<span class="consent" style="margin-top:4px">${esc(f.text)}</span>` : ""}</span></label></div>`;
   }
-  const extra = f.type === "tel" ? `inputmode="tel" autocomplete="tel"` : f.type === "email" ? `inputmode="email" autocomplete="email"` : f.k === "name" ? `autocomplete="name"` : "";
-  return `<div class="f"><label for="f-${f.k}">${esc(f.label)}${req}</label><input id="f-${f.k}" type="${f.type}" name="${f.k}" placeholder="${esc(f.ph||"")}" ${extra} ${f.req?"required":""}>${help}</div>`;
+  if (f.type === "textarea"){
+    return `<div class="f"><label for="f-${f.k}">${esc(f.label)}${req}</label><textarea id="f-${f.k}" name="${f.k}" placeholder="${esc(f.ph||"")}"></textarea>${help}</div>`;
+  }
+  const extra = f.type === "tel" ? `inputmode="tel" autocomplete="tel"` : f.autocomplete ? `autocomplete="${f.autocomplete}"` : "";
+  return `<div class="f"><label for="f-${f.k}">${esc(f.label)}${req}</label><input id="f-${f.k}" type="${f.type}" name="${f.k}" placeholder="${esc(f.ph||"")}" ${extra}>${help}</div>`;
+}
+
+function contactHTML(p, intro){
+  const mail = `mailto:hepyhae@naver.com?subject=${encodeURIComponent(`[${p.title}] 신청/문의`)}`;
+  return `
+    <p style="font-size:14px;color:var(--ink-2);margin:10px 0 16px;word-break:keep-all">${intro}</p>
+    <div class="submit-row">
+      <a class="btn btn-primary" style="text-decoration:none" href="https://ig.me/m/tamnaground" target="_blank" rel="noopener">인스타 DM으로 보내기</a>
+      <a class="btn btn-ghost" style="text-decoration:none" href="tel:010-4023-8081">전화하기</a>
+      <a class="btn btn-ghost" style="text-decoration:none" href="${mail}">이메일로 보내기</a>
+    </div>`;
 }
 
 function openSheet(id){
   const p = PROGRAMS.find(x => x.id === id); if (!p) return;
   const c = $("#sheet-content");
-  const subtitle = p.status === "open" ? "선착순 접수 · 확인 후 문자 안내" : p.status === "notify" ? "오픈 즉시 문자로 알려드려요" : "확인 후 연락드립니다";
+  const head = (sub) => `<div class="sheet-h"><div><h3 id="sheet-title">${esc(p.title)}</h3><p>${sub}</p></div><button class="x" data-close aria-label="닫기">✕</button></div>`;
 
-  if (!ENDPOINT){
-    // 백엔드 미연결 상태 — DM/이메일로 안내
-    const mail = `mailto:hepyhae@naver.com?subject=${encodeURIComponent(`[${p.title}] 신청/문의`)}&body=${encodeURIComponent(p.fields.map(f => `${f.label}: `).join("\n"))}`;
-    c.innerHTML = `
-      <div class="sheet-h"><div><h3 id="sheet-title">${esc(p.title)}</h3><p>${subtitle}</p></div><button class="x" data-close aria-label="닫기">✕</button></div>
-      <p style="font-size:14px;color:var(--ink-2);margin:10px 0 14px;word-break:keep-all">아래 내용을 인스타 DM이나 이메일로 보내주시면 바로 접수돼요.</p>
-      <ul class="meta" style="margin-bottom:18px">${p.fields.filter(f=>f.req).map(f => `<li><span class="i">·</span><span>${esc(f.label)}</span></li>`).join("")}</ul>
-      <div class="submit-row">
-        <a class="btn btn-primary" style="text-decoration:none" href="https://ig.me/m/tamnaground" target="_blank" rel="noopener">인스타 DM으로 보내기</a>
-        <a class="btn btn-ghost" style="text-decoration:none" href="${mail}">이메일로 보내기</a>
-      </div>`;
+  if (p.contact || !p.fields){
+    c.innerHTML = head("확인 후 연락드립니다") + contactHTML(p, "학교·단체명, 담당자, 연락처, 문의 내용(구매 수량 / 수업 희망 시기)을 남겨주시면 견적서와 소개서를 보내드려요.");
+  } else if (!backendOf(p)){
+    c.innerHTML = head("신청 접수 준비 중") + contactHTML(p, "이 프로그램의 신청서가 곧 열려요. 지금 신청하시려면 이름·연락처·희망 날짜·인원을 DM으로 보내주세요.");
   } else {
-    c.innerHTML = `
-      <div class="sheet-h"><div><h3 id="sheet-title">${esc(p.title)}</h3><p>${subtitle}</p></div><button class="x" data-close aria-label="닫기">✕</button></div>
+    c.innerHTML = head("선착순 접수 · 입금 후 신청 완료") + `
+      <div class="pay">
+        <div class="pay-row"><span>참가비</span><b>${esc(p.price || "")}</b></div>
+        <div class="pay-row"><span>입금 계좌</span><b>${esc(BANK)}</b></div>
+        <button type="button" class="copy" data-copy="${esc(BANK.replace(/[^0-9-]/g,""))}">계좌번호 복사</button>
+        <div class="help" style="margin-top:6px">입금자명을 신청자명과 동일하게 해주세요. 입금 후 신청이 완료됩니다.</div>
+      </div>
       <form id="form" novalidate>
         <div class="err" id="err"></div>
         ${p.fields.map(fieldHTML).join("")}
         <div class="hp" aria-hidden="true"><label>회사명<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
-        <label class="agree"><input type="checkbox" name="agree" required><span>입력한 정보를 <b>${esc(p.title)}</b> 안내·운영 목적으로만 사용하는 데 동의합니다.</span></label>
         <div class="submit-row">
-          <button type="submit" class="btn ${p.btn}" id="submit">${p.status === "open" ? "신청 완료하기" : p.status === "notify" ? "알림 신청하기" : "문의 보내기"}</button>
+          <button type="submit" class="btn ${p.btn}" id="submit">신청 완료하기</button>
           <button type="button" class="btn btn-ghost" data-close>닫기</button>
         </div>
       </form>`;
@@ -407,36 +471,29 @@ async function submit(e, p){
   e.preventDefault();
   const form = e.target, err = $("#err");
   err.classList.remove("on");
+  const fail = (msg) => { err.textContent = msg; err.classList.add("on"); err.scrollIntoView({behavior:"smooth",block:"center"}); };
 
-  // 필수 검증
-  const data = { program: p.id, programTitle: p.title, source: location.href, ua: navigator.userAgent };
+  const data = Object.assign({}, p.fixed || {});
   for (const f of p.fields){
-    const v = f.type === "seg" ? (form.querySelector(`input[name="${f.k}"]:checked`)?.value || "") : (form.elements[f.k]?.value || "").trim();
-    if (f.req && !v){ err.textContent = `${f.label}을(를) 입력해 주세요.`; err.classList.add("on"); err.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+    let v = "";
+    if (f.type === "seg") v = form.querySelector(`input[name="${f.k}"]:checked`)?.value || "";
+    else if (f.type === "check") v = form.elements[f.k].checked ? f.value : "";
+    else v = (form.elements[f.k]?.value || "").trim();
+    if (f.req && !v) return fail(f.type === "check" ? `${f.label}에 체크해 주세요.` : `${f.label}을(를) 입력해 주세요.`);
     data[f.k] = v;
   }
-  if (data.phone){
-    const d = data.phone.replace(/\D/g, "");
-    const okPhone = /^0\d{8,10}$/.test(d) && !(d.startsWith("010") && d.length !== 11);
-    if (!okPhone){ err.textContent = "연락처 형식을 확인해 주세요. (예: 010-1234-5678)"; err.classList.add("on"); return; }
-  }
-  if (!form.elements.agree.checked){ err.textContent = "정보 이용에 동의해 주세요."; err.classList.add("on"); return; }
+  const d = data.phone.replace(/\D/g, "");
+  if (!(/^0\d{8,10}$/.test(d) && !(d.startsWith("010") && d.length !== 11))) return fail("연락처 형식을 확인해 주세요. (예: 010-1234-5678)");
   if (form.elements.company.value){ showDone(p); return; } // 봇 — 조용히 무시
 
   const btn = $("#submit"); btn.disabled = true; btn.textContent = "보내는 중…";
   try {
-    let ok = false;
-    try {
-      const r = await fetch(ENDPOINT, { method:"POST", body: JSON.stringify(data) }); // text/plain → simple request, CORS 프리플라이트 없음
-      const j = await r.json().catch(() => ({}));
-      ok = r.ok && j.ok !== false;
-      if (!ok && j.error) throw new Error(j.error);
-    } catch (inner) {
-      // 응답을 못 읽는 환경(일부 인앱 브라우저) — no-cors 재시도, 응답은 불투명하므로 성공으로 간주
-      await fetch(ENDPOINT, { method:"POST", mode:"no-cors", body: JSON.stringify(data) });
-      ok = true;
-    }
-    if (ok) showDone(p); else throw new Error("fail");
+    const g = backendOf(p);
+    const fd = new URLSearchParams();
+    for (const [k, id] of Object.entries(g.entry)) if (data[k]) fd.append(id, data[k]);
+    fd.append("fvv", "1"); fd.append("pageHistory", "0");
+    await fetch(g.action, { method:"POST", mode:"no-cors", body: fd });   // Google Forms는 응답을 읽을 수 없음(opaque) — 도달하면 접수됨
+    showDone(p);
   } catch (ex) {
     btn.disabled = false; btn.textContent = "다시 시도";
     err.innerHTML = `전송에 실패했어요. 잠시 후 다시 시도하거나 <a href="https://ig.me/m/tamnaground" target="_blank" rel="noopener">인스타 DM</a>으로 보내주세요.`;
@@ -448,9 +505,14 @@ function showDone(p){
   $("#sheet-content").innerHTML = `
     <div class="done">
       <div class="ico">✓</div>
-      <h3>${p.status === "open" ? "신청이 접수됐어요!" : p.status === "notify" ? "알림 신청 완료!" : "문의가 접수됐어요!"}</h3>
+      <h3>신청이 접수됐어요!</h3>
       <p>${esc(p.doneMsg)}</p>
-      <div class="submit-row">
+      <div class="pay" style="text-align:left">
+        <div class="pay-row"><span>참가비</span><b>${esc(p.price || "")}</b></div>
+        <div class="pay-row"><span>입금 계좌</span><b>${esc(BANK)}</b></div>
+        <button type="button" class="copy" data-copy="${esc(BANK.replace(/[^0-9-]/g,""))}">계좌번호 복사</button>
+      </div>
+      <div class="submit-row" style="margin-top:14px">
         <a class="btn btn-primary" style="text-decoration:none" href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener">인스타에서 소식 받기</a>
         <button type="button" class="btn btn-ghost" data-close>닫기</button>
       </div>
@@ -458,16 +520,18 @@ function showDone(p){
   $("#sheet").scrollTop = 0;
 }
 
-document.addEventListener("click", e => {
+document.addEventListener("click", async e => {
   const o = e.target.closest("[data-open]"); if (o){ openSheet(o.dataset.open); return; }
+  const cp = e.target.closest("[data-copy]");
+  if (cp){ try { await navigator.clipboard.writeText(cp.dataset.copy); cp.textContent = "복사됐어요 ✓"; setTimeout(() => cp.textContent = "계좌번호 복사", 1800); } catch(_){} return; }
   if (e.target.closest("[data-close]") || e.target === $("#overlay")) closeSheet();
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
 
 renderCards();
-// ?p=biyang 처럼 링크로 특정 프로그램 폼을 바로 열 수 있어요 (카드뉴스 CTA용)
+// ?p=biyang-prince 처럼 링크로 특정 프로그램 폼을 바로 열 수 있어요 (카드뉴스 CTA용)
 const qp = new URLSearchParams(location.search).get("p");
-if (qp && PROGRAMS.some(x => x.id === qp)) setTimeout(() => openSheet(qp), 250);
+if (qp && PROGRAMS.some(x => x.id === qp && x.status !== "soon")) setTimeout(() => openSheet(qp), 250);
 </script>
 </body>
 </html>
