@@ -240,16 +240,16 @@ const GFORM_ENTRY = {   // 세 폼 모두 같은 질문 구성(사본)이라 ent
 };
 const GFORMS = {
   "biyang-prince":   { action: "https://docs.google.com/forms/d/e/1FAIpQLScn8il26QrOc5Tte3xHoFblGZ6QlS5RrD13FbXgmO2_o2MDpQ/formResponse", entry: GFORM_ENTRY },
-  "gyorae-hajungdo": { action: "", entry: GFORM_ENTRY },   // 게시 후 /d/e/ 주소 입력
-  "seongeup-escape": { action: "", entry: GFORM_ENTRY },   // 게시 후 /d/e/ 주소 입력
+  "gyorae-hajungdo": { action: "https://docs.google.com/forms/d/e/1FAIpQLSfl2RUllEaakakIANLtWAKWa-1fqSWRUW6SJ7XTf3Vf9NW15A/formResponse", entry: GFORM_ENTRY },   // forms.gle/ojcKxmz8FVAi8E4U6
+  "seongeup-escape": { action: "https://docs.google.com/forms/d/e/1FAIpQLSfW37w64Gk2EEifk0AZM8xfgrt5GIGl5UXUcsxNRNpBSU079w/formResponse", entry: GFORM_ENTRY },   // forms.gle/7RqBEnsTMoTEEkCF9
 };
 const BANK = "농협 352-2232-4044-73 (ㄱㅇㅈ)";
 
-// 공통 신청 항목 (구글폼과 동일) — dateOpts만 프로그램별로 다름
-const applyFields = (dateOpts) => [
+// 공통 신청 항목 (구글폼과 동일) — dateOpts(선택지)와 dateLabel만 프로그램별로 다름
+const applyFields = (dateOpts, dateLabel = "희망 날짜") => [
   { k:"name",  label:"이름", type:"text", req:true, ph:"홍길동", autocomplete:"name" },
   { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000", help:"신청 확인 및 안내 연락에 사용돼요" },
-  ...(dateOpts.length > 1 ? [{ k:"date", label:"희망 날짜", type:"seg", req:true, opts:dateOpts }] : []),
+  ...(dateOpts.length > 1 ? [{ k:"date", label:dateLabel, type:"seg", req:true, opts:dateOpts }] : []),
   { k:"payer", label:"입금자명", type:"text", req:true, ph:"입금하실 분 성함", help:"신청자명과 다를 경우 꼭 입금자명을 적어주세요 (입금 확인용)" },
   { k:"payStatus", label:"입금 예정", type:"seg", req:true, opts:["입금 완료","금일 중 입금 예정","1-2일 후 입금 예정"] },
   { k:"source", label:"어떻게 알게 되셨나요?", type:"seg", req:true, opts:["인스타그램 광고","인스타그램 게시물/릴스","지인 추천","기타"] },
@@ -310,12 +310,11 @@ const PROGRAMS = [
       ["🏛️", "10:00 정의향교 행사 관람"],
       ["🍚", "12:00 고백소찬 점심 식사"],
       ["🔓", "13:00 성읍 야외 방탈출 (약 2시간)"],
-      ["💰", "참가비 35,000원 (점심 포함)"],
+      ["💰", "참가비 35,000원 (점심 포함) · 방탈출만 참여 시 20,000원"],
       ["👟", "편한 복장 · 운동화 필수"],
     ],
-    cta: "성읍 방탈출 신청하기", btn: "btn-primary", price: "1인 35,000원",
-    fixed: { date: "9월 20일 일요일" },
-    fields: applyFields(["9월 20일 일요일"]),
+    cta: "성읍 방탈출 신청하기", btn: "btn-primary", price: "전체 35,000원 · 방탈출만 20,000원",
+    fields: applyFields(["모든 프로그램 참가","성읍방탈출만 참가"], "참가 프로그램"),
     doneMsg: "입금 확인 후 문자로 확정 안내와 집결 장소를 알려드릴게요 🔓",
   },
 
