@@ -281,6 +281,7 @@ const PROGRAMS = [
       ["📌", "신청 마감 9/8(화) · 확정자 개별 연락"],
     ],
     cta: "비양도 어린왕자 신청하기", btn: "btn-primary", price: "1인 45,000원",
+    link: "https://forms.gle/VvHaDi3et3EgoTaFA",   // 카드뉴스 QR과 동일한 기존 구글폼 (새 탭으로 열림)
     fields: applyFields(["9월 12일 토요일","9월 13일 일요일"]),
     doneMsg: "입금 확인 후 문자로 확정 안내를 드릴게요. 회차당 15명 선착순이라 안내는 빠르게 갈 거예요 💙",
   },
@@ -372,7 +373,9 @@ function cardHTML(p){
   const badgeCls = p.status === "open" ? `open ${p.theme === "green" ? "g" : ""}` : p.status;
   const foot = p.status === "soon"
     ? `<div class="soon-note">🔔 신청 오픈 시 <a href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink-2)">@tamnaground</a>에서 가장 먼저 안내해요</div>`
-    : `<button class="btn ${p.btn}" data-open="${p.id}">${esc(p.cta)} →</button>`;
+    : p.link
+      ? `<a class="btn ${p.btn}" style="text-decoration:none" href="${p.link}" target="_blank" rel="noopener">${esc(p.cta)} →</a>`
+      : `<button class="btn ${p.btn}" data-open="${p.id}">${esc(p.cta)} →</button>`;
   return `
     <article class="card ${p.status}" id="card-${p.id}">
       <div class="card-media ${p.image ? "" : "grad"}" ${p.grad ? `style="background:${p.grad}"` : ""}>
@@ -531,7 +534,8 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet()
 renderCards();
 // ?p=biyang-prince 처럼 링크로 특정 프로그램 폼을 바로 열 수 있어요 (카드뉴스 CTA용)
 const qp = new URLSearchParams(location.search).get("p");
-if (qp && PROGRAMS.some(x => x.id === qp && x.status !== "soon")) setTimeout(() => openSheet(qp), 250);
+const qpP = PROGRAMS.find(x => x.id === qp && x.status !== "soon");
+if (qpP) { if (qpP.link) location.replace(qpP.link); else setTimeout(() => openSheet(qp), 250); }
 </script>
 </body>
 </html>
