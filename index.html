@@ -206,7 +206,7 @@
   </section>
 
   <section class="sec" aria-labelledby="h-soon">
-    <div class="sec-h"><h2 id="h-soon">10월 예정</h2><span>신청 오픈은 인스타에서 안내</span></div>
+    <div class="sec-h"><h2 id="h-soon">예정</h2><span>신청 오픈은 인스타에서 안내</span></div>
     <div class="cards" id="cards-soon"></div>
   </section>
 
@@ -243,7 +243,6 @@ const GFORMS = {
   "biyang-prince":   { action: "https://docs.google.com/forms/d/e/1FAIpQLSeffGK9yvIv8vYjUoX6RASV18gxrx-7TFMriK217HNznajZVA/formResponse", entry: GFORM_ENTRY },   // 「비양도, 어린왕자를 찾아서 10월 (10/23·24·25)」 — 9월 폼 사본
   "biyang-stay":     { action: "https://docs.google.com/forms/d/e/1FAIpQLSeW8Ez1_I2CjA0nuX8jMiRY0k041vYauhjAiGBODw89I0_LDw/formResponse", entry: GFORM_ENTRY },   // 「비우고 양식을 채우는 섬, 비양도 1박2일」 — 9월 폼 사본
   "gyorae-hajungdo": { action: "https://docs.google.com/forms/d/e/1FAIpQLSfl2RUllEaakakIANLtWAKWa-1fqSWRUW6SJ7XTf3Vf9NW15A/formResponse", entry: GFORM_ENTRY },   // forms.gle/ojcKxmz8FVAi8E4U6
-  "seongeup-escape": { action: "https://docs.google.com/forms/d/e/1FAIpQLSfW37w64Gk2EEifk0AZM8xfgrt5GIGl5UXUcsxNRNpBSU079w/formResponse", entry: GFORM_ENTRY },   // forms.gle/7RqBEnsTMoTEEkCF9
 };
 const BANK = "농협 352-2232-4044-73 (ㄱㅇㅈ)";
 // 성읍 재현축제 제주어 프로그램: 문항 구성이 달라(자파리·과거시험) 구글폼을 그대로 페이지 안에 삽입
@@ -272,23 +271,6 @@ const applyFields = (dateOpts, dateLabel = "희망 날짜", refundText = REFUND_
    status: open(신청 접수) / soon(예정, 폼 없음) / inquiry(문의)
    ========================================================= */
 const PROGRAMS = [
-  {
-    id: "seongeup-escape", status: "open",
-    badge: "9월 모집 중", tag: "성읍민속마을 · 9/20(일)",
-    image: "assets/seongeup_july.jpg", pos: "50% 80%",   // 7월 행사 사진(남문 앞 참가자) — 아래쪽이 보이도록
-    title: "성읍 방탈출 · 조선으로 떠나는 제주여행",
-    sub: "600년 된 성읍민속마을이 통째로 게임판! 정의향교 행사 관람으로 시작해, 고백소찬에서 점심을 먹고, 돌담 사이 숨은 단서를 찾아 마을을 탈출하는 하루",
-    meta: [
-      ["📍", "집결: 정의향교 (성읍민속마을)"],
-      ["🏛️", "10:00 정의향교 행사 관람 → 12:00 고백소찬 점심 → 14:00 성읍 방탈출 (약 2시간)"],
-      ["💰", "참가비 1인 35,000원 (점심 식비 포함) · 방탈출만 참여 시 20,000원"],
-      ["👟", "준비: 편한 복장"],
-      ["📌", "선착순 마감 · 확정자는 개별 연락"],
-    ],
-    cta: "성읍 방탈출 신청하기", btn: "btn-primary", price: "전체 35,000원 · 방탈출만 20,000원",
-    fields: applyFields(["모든 프로그램 참가","성읍방탈출만 참가"], "참가 프로그램"),
-    doneMsg: "입금 확인 후 문자로 확정 안내와 집결 장소를 알려드릴게요 🔓",
-  },
   {
     id: "seongeup-festival", status: "open",
     badge: "10월 3-4일", tag: "성읍민속마을 재현축제 · 10/3(토) · 10/4(일)",
@@ -359,20 +341,6 @@ const PROGRAMS = [
     cta: "비양도 어린왕자 신청하기", btn: "btn-primary", price: "1인 25,000원",
     fields: applyFields(["10월 23일 금요일","10월 24일 토요일","10월 25일 일요일"]),
     doneMsg: "입금 확인 후 문자로 확정 안내를 드릴게요. 어린왕자 코스프레로 오시면 사진이 더 예뻐요 💙",
-  },
-
-  /* ---------- 10월 예정 (폼 없음) ---------- */
-  {
-    id: "gyorae-return", status: "soon", theme: "green",
-    badge: "10월 예정", tag: "교래리 · 10/16(금) · 10/17(토)",
-    emoji: "🏘️", grad: "linear-gradient(135deg,#8FD694 0%,#2E7D32 55%,#1B5E20 100%)",
-    title: "「사라진 마을의 귀환」",
-    sub: "잠든 수호신들을 깨워 마을을 지켜내는 미션 워크. 교래리사무소부터 약 2.5km를 걸으며 스팟별 미션을 풀고, 닭칼국수로 마무리",
-    meta: [
-      ["⏱️", "2시간 30분 · 약 2.5km 걷기"],
-      ["🍜", "닭칼국수 식사 포함"],
-      ["💚", "정가 50,000원 → 10월 한정 35,000원"],
-    ],
   },
 
   /* ---------- 문의 ---------- */
