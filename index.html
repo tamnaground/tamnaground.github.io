@@ -308,6 +308,8 @@ const PROGRAMS = [
   },
   {
     id: "biyang-stay", status: "open",
+    openAt: "2026-09-23T10:00:00+09:00",   // 이 시각(한국시간)이 지나면 자동으로 '신청 접수 중'으로 열립니다
+    soonBadge: "9/23(수) 10시 신청 오픈",
     badge: "10월 모집 중", tag: "비양도 1박 2일 · 10/9-10 · 10/10-11",
     image: "assets/biyang.jpg",
     title: "마음을 비우고 양식을 채우는 섬, 비양도",
@@ -384,13 +386,31 @@ const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const backendOf = p => (GFORMS[p.id] && GFORMS[p.id].action) ? GFORMS[p.id] : null;
 
+/* 예약 오픈 — openAt(한국시간)이 지나기 전까지는 '예정' 카드로만 보이고, 시각이 지나면
+   새로고침만으로 '신청 접수 중'이 됩니다 (재배포 불필요). 방문자 기기 시계를 기준으로 판단해요. */
+const openAtFmt = t => { try {
+  return new Intl.DateTimeFormat("ko-KR", { timeZone:"Asia/Seoul", month:"long", day:"numeric", weekday:"short", hour:"numeric", minute:"2-digit" }).format(t);
+} catch(_){ return ""; } };
+function viewPrograms(){
+  const now = Date.now();
+  return PROGRAMS.map(p => {
+    if (!p.openAt) return p;
+    const t = new Date(p.openAt).getTime();
+    if (Number.isFinite(t) && now >= t) return p;          // 오픈 시각이 지남 → 원래 status 그대로
+    const when = Number.isFinite(t) ? openAtFmt(t) : "";   // 값이 잘못됐으면 안전하게 계속 닫아 둡니다
+    return { ...p, status: "soon", badge: p.soonBadge || p.badge,
+             soonNote: when ? `🔔 ${when} 신청 오픈` : "🔔 신청 오픈 예정" };
+  });
+}
+
 function cardHTML(p){
   const media = p.image
     ? `<img src="${p.image}" alt="" loading="lazy" ${p.pos ? `style="object-position:${p.pos}"` : ""}>`
     : `<div class="big" aria-hidden="true">${p.emoji || "🍊"}</div>`;
   const badgeCls = p.status === "open" ? `open ${p.theme === "green" ? "g" : ""}` : p.status;
+  const ig = `<a href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink-2)">@tamnaground</a>`;
   const foot = p.status === "soon"
-    ? `<div class="soon-note">🔔 신청 오픈 시 <a href="https://www.instagram.com/tamnaground/" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink-2)">@tamnaground</a>에서 가장 먼저 안내해요</div>`
+    ? `<div class="soon-note">${p.soonNote ? `${esc(p.soonNote)} · ${ig}에서도 안내해요` : `🔔 신청 오픈 시 ${ig}에서 가장 먼저 안내해요`}</div>`
     : p.link
       ? `<a class="btn ${p.btn}" style="text-decoration:none" href="${p.link}" target="_blank" rel="noopener">${esc(p.cta)} →</a>`
       : `<button class="btn ${p.btn}" data-open="${p.id}">${esc(p.cta)} →</button>`;
@@ -411,8 +431,9 @@ function cardHTML(p){
 }
 
 function renderCards(){
+  const view = viewPrograms();
   for (const [st, sel] of [["open","#cards-open"],["soon","#cards-soon"],["inquiry","#cards-inquiry"]]){
-    const list = PROGRAMS.filter(p => p.status === st);
+    const list = view.filter(p => p.status === st);
     const box = $(sel); box.innerHTML = list.map(cardHTML).join("");
     box.closest(".sec").style.display = list.length ? "" : "none";
   }
@@ -561,8 +582,12 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet()
 renderCards();
 // ?p=biyang-prince 처럼 링크로 특정 프로그램 폼을 바로 열 수 있어요 (카드뉴스 CTA용)
 const qp = new URLSearchParams(location.search).get("p");
-const qpP = PROGRAMS.find(x => x.id === qp && x.status !== "soon");
+const qpP = viewPrograms().find(x => x.id === qp && x.status !== "soon");
 if (qpP) { if (qpP.link) location.replace(qpP.link); else setTimeout(() => openSheet(qp), 250); }
+// 페이지를 열어 둔 사이에 오픈 시각이 지나면 그 순간 카드가 알아서 '신청 접수 중'으로 바뀌어요
+const nextOpen = PROGRAMS.map(p => p.openAt ? new Date(p.openAt).getTime() - Date.now() : NaN)
+  .filter(ms => ms > 0 && ms < 6*60*60*1000);
+if (nextOpen.length) setTimeout(renderCards, Math.min(...nextOpen) + 1000);
 </script>
 </body>
 </html>
