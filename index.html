@@ -6,7 +6,7 @@
 <title>탐라그라운드 · 프로그램 신청</title>
 <meta name="description" content="제주어 놀이 기반 제주문화 이색 체험, 탐라그라운드. 비양도·성읍·교래리 프로그램 신청 페이지">
 <meta property="og:title" content="탐라그라운드 · 프로그램 신청">
-<meta property="og:description" content="비양도 어린왕자를 찾아서 · 성읍 방탈출 · 교래리 오감체험 — 여기서 바로 신청하세요">
+<meta property="og:description" content="성읍 재현축제 제주어 프로그램 · 비양도 1박2일 · 교래리 하중도 · 비양도 어린왕자 — 여기서 바로 신청하세요">
 <meta property="og:image" content="https://tamnaground.github.io/assets/biyang.jpg">
 <meta name="theme-color" content="#FFF4EA">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23E8630A'/><text x='50' y='66' font-size='46' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>탐</text></svg>">
@@ -163,6 +163,7 @@
   .done .ico{width:64px;height:64px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:0 auto 14px;font-size:30px}
   .done h3{margin:0 0 6px;font-size:20px}
   .done p{margin:0 0 18px;color:var(--ink-2);font-size:14px;word-break:keep-all}
+  .gform{width:100%;height:72dvh;min-height:420px;border:0;border-radius:14px;background:#fff;margin-top:8px}
   .err{background:#FDECEC;color:#9B1C1C;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px;display:none}
   .err.on{display:block}
   .consent{font-size:12px;color:var(--ink-3);line-height:1.5;margin:0 0 8px;word-break:keep-all;display:block;font-weight:500}
@@ -200,7 +201,7 @@
   </nav>
 
   <section class="sec" aria-labelledby="h-open">
-    <div class="sec-h"><h2 id="h-open">9월 프로그램 · 신청 접수 중</h2><span>버튼을 누르면 바로 신청돼요</span></div>
+    <div class="sec-h"><h2 id="h-open">신청 접수 중</h2><span>버튼을 누르면 바로 신청돼요</span></div>
     <div class="cards" id="cards-open"></div>
   </section>
 
@@ -233,17 +234,20 @@
    접수 설정 — 프로그램별 Google Forms 직접 연결
    (formResponse 주소 + 질문별 entry ID. README 참고)
    ========================================================= */
-const GFORM_ENTRY = {   // 세 폼 모두 같은 질문 구성(사본)이라 entry ID가 동일
+const GFORM_ENTRY = {   // 신청 폼은 모두 같은 질문 구성(사본)이라 entry ID가 동일 (2026-09-17 사본 2개도 확인 완료)
   name: "entry.1324470836", phone: "entry.1981181365", date: "entry.2040371820",
   payer: "entry.652419604", payStatus: "entry.7882954", source: "entry.1132267440",
   privacy: "entry.454222183", portrait: "entry.566435667", refund: "entry.882807117",
 };
 const GFORMS = {
-  "biyang-prince":   { action: "https://docs.google.com/forms/d/e/1FAIpQLScn8il26QrOc5Tte3xHoFblGZ6QlS5RrD13FbXgmO2_o2MDpQ/formResponse", entry: GFORM_ENTRY },
+  "biyang-prince":   { action: "https://docs.google.com/forms/d/e/1FAIpQLSeffGK9yvIv8vYjUoX6RASV18gxrx-7TFMriK217HNznajZVA/formResponse", entry: GFORM_ENTRY },   // 「비양도, 어린왕자를 찾아서 10월 (10/23·24·25)」 — 9월 폼 사본
+  "biyang-stay":     { action: "https://docs.google.com/forms/d/e/1FAIpQLSeW8Ez1_I2CjA0nuX8jMiRY0k041vYauhjAiGBODw89I0_LDw/formResponse", entry: GFORM_ENTRY },   // 「비우고 양식을 채우는 섬, 비양도 1박2일」 — 9월 폼 사본
   "gyorae-hajungdo": { action: "https://docs.google.com/forms/d/e/1FAIpQLSfl2RUllEaakakIANLtWAKWa-1fqSWRUW6SJ7XTf3Vf9NW15A/formResponse", entry: GFORM_ENTRY },   // forms.gle/ojcKxmz8FVAi8E4U6
   "seongeup-escape": { action: "https://docs.google.com/forms/d/e/1FAIpQLSfW37w64Gk2EEifk0AZM8xfgrt5GIGl5UXUcsxNRNpBSU079w/formResponse", entry: GFORM_ENTRY },   // forms.gle/7RqBEnsTMoTEEkCF9
 };
 const BANK = "농협 352-2232-4044-73 (ㄱㅇㅈ)";
+// 성읍 재현축제 제주어 프로그램: 문항 구성이 달라(자파리·과거시험) 구글폼을 그대로 페이지 안에 삽입
+const FESTIVAL_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScb7xigUSnAXpdDJgEPjlDe0PZgcCsN0pZEdj4zk4vSfYySzw/viewform";
 
 // 공통 신청 항목 (구글폼과 동일) — dateOpts(선택지)와 dateLabel만 프로그램별로 다름
 const applyFields = (dateOpts, dateLabel = "희망 날짜") => [
@@ -268,40 +272,6 @@ const applyFields = (dateOpts, dateLabel = "희망 날짜") => [
    ========================================================= */
 const PROGRAMS = [
   {
-    id: "biyang-prince", status: "open",
-    badge: "9월 모집 중", tag: "비양도 · 9/12(토) · 9/13(일)",
-    image: "assets/biyang.jpg",
-    title: "비양도, 어린왕자를 찾아서",
-    sub: "B612로 돌아간 어린왕자가 지구별 'B양도'에 남긴 흔적을 책 속 장면을 단서 삼아 찾아 걷는 하루",
-    meta: [
-      ["⏰", "11:30 한림항 매표소 집결 → 16:00 종료"],
-      ["🍚", "비양도 안 점심 + 왕복 배삯 포함"],
-      ["💙", "참가비 45,000원 (9월 한정)"],
-      ["👥", "회차당 15명 선착순 · 『어린왕자』 책 지참"],
-      ["📌", "신청 마감 9/8(화) · 확정자 개별 연락"],
-    ],
-    cta: "비양도 어린왕자 신청하기", btn: "btn-primary", price: "1인 45,000원",
-    link: "https://forms.gle/VvHaDi3et3EgoTaFA",   // 카드뉴스 QR과 동일한 기존 구글폼 (새 탭으로 열림)
-    fields: applyFields(["9월 12일 토요일","9월 13일 일요일"]),
-    doneMsg: "입금 확인 후 문자로 확정 안내를 드릴게요. 회차당 15명 선착순이라 안내는 빠르게 갈 거예요 💙",
-  },
-  {
-    id: "gyorae-hajungdo", status: "open", theme: "green",
-    badge: "10월 모집 중", tag: "교래리 · 10/17(토) · 10/22(목)",
-    emoji: "🌿", grad: "linear-gradient(135deg,#8FD694 0%,#2E7D32 55%,#1B5E20 100%)",
-    title: "교래리 오감체험 「잃어버린 섬, 하중도」",
-    sub: "곶자왈 마을 교래리에서 사라진 섬 '하중도'의 흔적을 오감으로 찾아가는 체험",
-    meta: [
-      ["⏰", "오전 9:30 – 12:00 (2시간 30분)"],
-      ["📍", "제주 조천읍 교래리"],
-      ["👥", "10/17 자녀동반 가족 · 10/22 성인 대상"],
-      ["💚", "참가비 10,000원"],
-    ],
-    cta: "하중도 오감체험 신청하기", btn: "btn-green", price: "1인 10,000원",
-    fields: applyFields(["10월 17일 토요일 (자녀동반 가족)","10월 22일 목요일 (성인 대상)"]),
-    doneMsg: "입금 확인 후 문자로 집결 장소와 준비물을 안내해 드릴게요 🌿",
-  },
-  {
     id: "seongeup-escape", status: "open",
     badge: "9월 모집 중", tag: "성읍민속마을 · 9/20(일)",
     image: "assets/seongeup_july.jpg", pos: "50% 80%",   // 7월 행사 사진(남문 앞 참가자) — 아래쪽이 보이도록
@@ -318,19 +288,77 @@ const PROGRAMS = [
     fields: applyFields(["모든 프로그램 참가","성읍방탈출만 참가"], "참가 프로그램"),
     doneMsg: "입금 확인 후 문자로 확정 안내와 집결 장소를 알려드릴게요 🔓",
   },
-
-  /* ---------- 10월 예정 (폼 없음) ---------- */
   {
-    id: "biyang-stay", status: "soon",
-    badge: "10월 예정", tag: "비양도 · 1박 2일",
+    id: "seongeup-festival", status: "open",
+    badge: "10월 3-4일", tag: "성읍민속마을 재현축제 · 10/3(토) · 10/4(일)",
+    image: "assets/seongeup_festival.jpg", pos: "50% 60%",
+    title: "재현축제와 함께하는 제주어 프로그램",
+    sub: "10월 제주어의 달, 제32회 전통민속 재현축제에서 탐라그라운드가 여는 제주어 놀이. 제주어를 몰라도 관심만 있으면 누구나!",
+    meta: [
+      ["✍️", "상시 · 제주어 삼행시 짓기 · 제주어 백일장 (1등 5만원 · 2등 3만원 · 3등 1만원)"],
+      ["🔓", "10/3(토) 10:00-12:00 제주어 자파리(성읍 방탈출) · 1인 10,000원 · 8가족 한정"],
+      ["📜", "10/4(일) 유생복 입고 제주어 과거시험 · 장원 15만원 · 부장원 10만원 · 장려 5만원"],
+      ["📖", "과거시험 사전 신청자에게 기출문제 미리 제공"],
+      ["⏰", "10/3 10:00-17:00 · 10/4 10:00-12:00"],
+    ],
+    cta: "제주어 프로그램 신청하기", btn: "btn-primary",
+    embed: FESTIVAL_FORM,   // 페이지 안에 구글폼 삽입 (자파리·과거시험 문항이 달라 공통 신청서 대신 폼 자체를 띄움)
+  },
+  {
+    id: "biyang-stay", status: "open",
+    badge: "10월 모집 중", tag: "비양도 1박 2일 · 10/9-10 · 10/10-11",
     image: "assets/biyang.jpg",
     title: "마음을 비우고 양식을 채우는 섬, 비양도",
-    sub: "섬에서 하룻밤. 비우고 채우는 1박 2일 프로그램",
+    sub: "제주 최서단 비양도에서 하룻밤. 올리브 밭과 노을, 해녀가 직접 잡은 해산물로 채우는 1박 2일",
     meta: [
-      ["🗓️", "1회차 10/9(금) – 10/10(토)"],
-      ["🗓️", "2회차 10/10(토) – 10/11(일)"],
+      ["🗓️", "1회차 10/9(금)-10(토) 8명 한정 · 2회차 10/10(토)-11(일) 12명 한정"],
+      ["⛴️", "첫날 15:30 비양도행 배 승선 → 16:00 올리브 밭 투어 → 17:00 최서단 노을"],
+      ["🍽️", "19:00 해녀가 직접 잡은 해산물 & 올리브 요리 경연대회 → 21:00 올리브 방향제 만들기"],
+      ["🍵", "이튿날 08:00 조식 → 09:00 올리브잎 다도 체험 → 11:00 자유시간 → 12:15 한림항행 승선"],
+      ["💙", "참가비 1인 30,000원 · 3인 1실 제공 (방 배정은 현장에서)"],
+      ["👤", "신청서 1건에 1명만 · 동행자는 각자 신청"],
     ],
+    cta: "비양도 1박 2일 신청하기", btn: "btn-primary", price: "1인 30,000원",
+    note: "신청서 1건에 1명만 작성할 수 있어요 (동행자는 각자 신청). 숙소는 3인 1실로 제공되며 방 배정은 현장에서 정해요.",
+    fields: applyFields(["1회차 10월 9일(금)-10일(토) · 8명 한정","2회차 10월 10일(토)-11일(일) · 12명 한정"], "희망 회차"),
+    doneMsg: "입금 확인 후 문자로 확정 안내와 준비물을 알려드릴게요. 회차별 인원이 적어 안내는 빠르게 갈 거예요 🌿",
   },
+  {
+    id: "gyorae-hajungdo", status: "open", theme: "green",
+    badge: "10월 모집 중", tag: "교래리 · 10/17(토) · 10/22(목)",
+    image: "assets/hajungdo.jpg", pos: "50% 45%",   // 하중도 실사 (물줄기 떨어지는 바위층)
+    title: "교래리 오감체험 「잃어버린 섬, 하중도」",
+    sub: "곶자왈 마을 교래리에서 사라진 섬 '하중도'의 흔적을 오감으로 찾아가는 체험",
+    meta: [
+      ["⏰", "오전 9:30 – 12:00 (2시간 30분)"],
+      ["📍", "제주 조천읍 교래리"],
+      ["👥", "10/17(토) 자녀동반 가족 · 10/22(목) 성인 대상"],
+      ["💚", "참가비 10,000원"],
+    ],
+    cta: "하중도 오감체험 신청하기", btn: "btn-green", price: "1인 10,000원",
+    fields: applyFields(["10월 17일 토요일 (자녀동반 가족)","10월 22일 목요일 (성인 대상)"]),
+    doneMsg: "입금 확인 후 문자로 집결 장소와 준비물을 안내해 드릴게요 🌿",
+  },
+  {
+    id: "biyang-prince", status: "open",
+    badge: "10월 모집 중", tag: "비양도 · 10/23(금) · 10/24(토) · 10/25(일)",
+    image: "assets/biyang.jpg",
+    title: "비양도, 어린왕자를 찾아서",
+    sub: "B612로 돌아간 어린왕자가 지구별 'B양도'에 남긴 흔적을 책 속 장면을 단서 삼아 찾아 걷는 하루",
+    meta: [
+      ["⛴️", "12:00 비양도행 배 승선 (한림항 매표소 11:45 집결)"],
+      ["📒", "미션수첩 들고 비양도 한 바퀴 → 15:00 나만의 어린왕자를 찾아서"],
+      ["⏰", "15:45 한림항행 배 승선 · 16:00 해산"],
+      ["💙", "참가비 1인 25,000원"],
+      ["👑", "어린왕자 코스프레 추천! 노란 머플러·초록 코트·장미 한 송이 — 섬 전체가 포토존"],
+      ["📖", "『어린왕자』 책 지참"],
+    ],
+    cta: "비양도 어린왕자 신청하기", btn: "btn-primary", price: "1인 25,000원",
+    fields: applyFields(["10월 23일 금요일","10월 24일 토요일","10월 25일 일요일"]),
+    doneMsg: "입금 확인 후 문자로 확정 안내를 드릴게요. 어린왕자 코스프레로 오시면 사진이 더 예뻐요 💙",
+  },
+
+  /* ---------- 10월 예정 (폼 없음) ---------- */
   {
     id: "gyorae-return", status: "soon", theme: "green",
     badge: "10월 예정", tag: "교래리 · 10/16(금) · 10/17(토)",
@@ -435,7 +463,14 @@ function openSheet(id){
   const c = $("#sheet-content");
   const head = (sub) => `<div class="sheet-h"><div><h3 id="sheet-title">${esc(p.title)}</h3><p>${sub}</p></div><button class="x" data-close aria-label="닫기">✕</button></div>`;
 
-  if (p.contact || !p.fields){
+  if (p.embed){
+    c.innerHTML = head("구글폼으로 바로 신청 · 제출하면 접수 완료") + `
+      <iframe class="gform" src="${p.embed}?embedded=true" title="${esc(p.title)} 신청서" loading="lazy"></iframe>
+      <div class="submit-row" style="margin-top:10px">
+        <a class="btn btn-ghost" style="text-decoration:none" href="${p.embed}" target="_blank" rel="noopener">새 탭에서 크게 열기</a>
+        <button type="button" class="btn btn-ghost" data-close>닫기</button>
+      </div>`;
+  } else if (p.contact || !p.fields){
     c.innerHTML = head("확인 후 연락드립니다") + contactHTML(p, "학교·단체명, 담당자, 연락처, 문의 내용(구매 수량 / 수업 희망 시기)을 남겨주시면 견적서와 소개서를 보내드려요.");
   } else if (!backendOf(p)){
     c.innerHTML = head("신청 접수 준비 중") + contactHTML(p, "이 프로그램의 신청서가 곧 열려요. 지금 신청하시려면 이름·연락처·희망 날짜·인원을 DM으로 보내주세요.");
@@ -446,6 +481,7 @@ function openSheet(id){
         <div class="pay-row"><span>입금 계좌</span><b>${esc(BANK)}</b></div>
         <button type="button" class="copy" data-copy="${esc(BANK.replace(/[^0-9-]/g,""))}">계좌번호 복사</button>
         <div class="help" style="margin-top:6px">입금자명을 신청자명과 동일하게 해주세요. 입금 후 신청이 완료됩니다.</div>
+        ${p.note ? `<div class="help" style="margin-top:6px;color:var(--ink-2);font-weight:600">${esc(p.note)}</div>` : ""}
       </div>
       <form id="form" novalidate>
         <div class="err" id="err"></div>
