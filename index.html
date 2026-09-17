@@ -244,9 +244,13 @@ const GFORMS = {
   "biyang-stay":     { action: "https://docs.google.com/forms/d/e/1FAIpQLSeW8Ez1_I2CjA0nuX8jMiRY0k041vYauhjAiGBODw89I0_LDw/formResponse", entry: GFORM_ENTRY },   // 「비우고 양식을 채우는 섬, 비양도 1박2일」 — 9월 폼 사본
   "gyorae-hajungdo": { action: "https://docs.google.com/forms/d/e/1FAIpQLSfl2RUllEaakakIANLtWAKWa-1fqSWRUW6SJ7XTf3Vf9NW15A/formResponse", entry: GFORM_ENTRY },   // forms.gle/ojcKxmz8FVAi8E4U6
 };
+// 성읍 재현축제 제주어 프로그램 폼 — 문항 구성이 달라 전용 entry 맵 (2026-09-17 viewform에서 확인)
+GFORMS["seongeup-festival"] = {
+  action: "https://docs.google.com/forms/d/e/1FAIpQLScb7xigUSnAXpdDJgEPjlDe0PZgcCsN0pZEdj4zk4vSfYySzw/formResponse",
+  entry: { japari: "entry.184401015", phone: "entry.839291592", payer: "entry.342661656", exam: "entry.1125134309",
+           privacy: "entry.1706413112", portrait: "entry.1790034703", refund: "entry.67645274" },
+};
 const BANK = "농협 352-2232-4044-73 (ㄱㅇㅈ)";
-// 성읍 재현축제 제주어 프로그램: 문항 구성이 달라(자파리·과거시험) 구글폼을 그대로 페이지 안에 삽입
-const FESTIVAL_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScb7xigUSnAXpdDJgEPjlDe0PZgcCsN0pZEdj4zk4vSfYySzw/viewform";
 
 // 공통 신청 항목 (구글폼과 동일) — dateOpts(선택지)와 dateLabel만 프로그램별로 다름
 const REFUND_4D = "행사 4일 전까지 취소: 전액 환불 · 행사 3일 전 ~ 당일 취소: 환불 불가 · 천재지변·주최측 사정으로 취소 시: 전액 환불";
@@ -284,8 +288,23 @@ const PROGRAMS = [
       ["📜", "10/4(일) 유생복 입고 제주어 과거시험 · 장원 15만원 · 부장원 10만원 · 장려 5만원"],
       ["📖", "과거시험 사전 신청자에게 기출문제 미리 제공"],
     ],
-    cta: "제주어 프로그램 신청하기", btn: "btn-primary",
-    embed: FESTIVAL_FORM,   // 페이지 안에 구글폼 삽입 (자파리·과거시험 문항이 달라 공통 신청서 대신 폼 자체를 띄움)
+    cta: "제주어 프로그램 신청하기", btn: "btn-primary", price: "제주어 자파리 1인 10,000원 · 8가족 한정",
+    note: "참가비 입금은 제주어 자파리(10/3) 신청자만 해당돼요. 신청서 제출 후 입금 확인되어야 확정됩니다. 과거시험(10/4) 신청자에게는 기출문제를 미리 보내드려요.",
+    // 구글폼 문항 그대로 (자파리·과거시험 중 하나만 적어도 됨)
+    fields: [
+      { k:"japari", label:"제주어 자파리(10/3) 참여 신청자 이름과 인원", type:"text", ph:"예: 홍길동 외 3명 (성인 2 · 어린이 2)", help:"10/3(토) 10:00-12:00 · 1인 10,000원 · 8가족 한정. 자파리에 참여하지 않으면 비워 두세요" },
+      { k:"phone", label:"연락처", type:"tel", req:true, ph:"010-0000-0000", help:"신청 확인 및 안내 연락에 사용돼요" },
+      { k:"payer", label:"입금자명", type:"text", ph:"자파리 참가비 입금하실 분 성함", help:"자파리 신청 시 · 신청자명과 다를 경우 꼭 적어주세요 (입금 확인용)" },
+      { k:"exam", label:"제주어 과거시험(10/4) 신청", type:"textarea", ph:"예: 어린이·청소년 부문 1명(홍길동), 성인 부문 1명(김제주) / 기출문제 받을 연락처 010-0000-0000", help:"신청 대상(어린이·청소년 / 성인)과 기출문제 받을 연락처를 적어주세요. 과거시험에 참여하지 않으면 비워 두세요" },
+      { k:"privacy", type:"check", req:true, value:"동의합니다", label:"개인정보 수집·이용 동의 (필수)",
+        text:"수집 항목: 성함, 연락처, 입금자명 · 목적: 신청·입금 확인, 행사 안내 · 보유 기간: 행사 종료 후 3개월, 이후 파기. 거부 시 신청 접수가 어려워요." },
+      { k:"portrait", type:"seg", req:true, label:"초상권 및 콘텐츠 활용 동의",
+        text:"행사 중 촬영된 사진·영상에 본인의 모습이 포함될 수 있으며, 탐라그라운드 홍보(인스타그램·유튜브·블로그, 온라인 광고, 홍보물)에 무상으로 활용됩니다. 철회 요청 시까지.",
+        opts:[ {v:"동의합니다", l:"동의합니다"}, {v:"동의하지 않습니", l:"홍보에서 제외해 주세요"} ] },   // 값은 구글폼 선택지 글자 그대로
+      { k:"refund", type:"check", req:true, value:"동의합니다", label:"환불 규정 동의 (필수)", text:REFUND_6D },
+    ],
+    validate: d => (d.japari || d.exam) ? "" : "제주어 자파리 또는 과거시험 중 하나는 적어주세요.",
+    doneMsg: "자파리 신청자는 입금 확인 후 확정 문자를, 과거시험 신청자에게는 기출문제를 보내드릴게요 📜",
   },
   {
     id: "biyang-stay", status: "open",
@@ -492,6 +511,7 @@ async function submit(e, p){
     if (f.req && !v) return fail(f.type === "check" ? `${f.label}에 체크해 주세요.` : `${f.label}을(를) 입력해 주세요.`);
     data[f.k] = v;
   }
+  if (p.validate){ const msg = p.validate(data); if (msg) return fail(msg); }
   const d = data.phone.replace(/\D/g, "");
   if (!(/^0\d{8,10}$/.test(d) && !(d.startsWith("010") && d.length !== 11))) return fail("연락처 형식을 확인해 주세요. (예: 010-1234-5678)");
   if (form.elements.company.value){ showDone(p); return; } // 봇 — 조용히 무시
